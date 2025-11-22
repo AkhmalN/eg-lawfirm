@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard/
+Disallow: /api/
+Sitemap: https://elmongultom.com/sitemap.xml
