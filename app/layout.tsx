@@ -1,18 +1,16 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import PageTransition from '@/components/PageTransition';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import dynamic from "next/dynamic";
+import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ['latin'] });
+// Semua client-only
+const Navbar = dynamic(() => import("@/components/Navbar"), { ssr: false });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Elmon Gultom Law Firm - Konsultan Hukum Profesional',
-  description:
-    'Firma hukum terpercaya di Indonesia. Melayani konsultasi hukum perusahaan, litigasi, kontrak, dan berbagai layanan hukum lainnya dengan tim profesional berpengalaman.',
-  keywords:
-    'firma hukum, konsultan hukum, pengacara, advokat, legal consultant, law firm Indonesia, jasa hukum, konsultasi hukum perusahaan',
+  title: "Elmon Gultom Law Firm",
+  description: "Firma hukum terpercaya di Indonesia",
 };
 
 export default function RootLayout({
@@ -24,9 +22,7 @@ export default function RootLayout({
     <html lang="id">
       <body className={inter.className}>
         <Navbar />
-        <PageTransition>
-          <main className="min-h-screen">{children}</main>
-        </PageTransition>
+        <main className="min-h-screen">{children}</main>
         <Footer />
       </body>
     </html>

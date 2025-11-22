@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Scale } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BrandLogo from "@/assets/logo-brand.png";
 import Image from "next/image";
@@ -20,24 +20,26 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [currentPath, setCurrentPath] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const pathname = usePathname();
-  // console.log(isScrolled);
+
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    setCurrentPath(pathname);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    setIsOpen(false);
+    setIsOpen(false); // close mobile menu on path change
   }, [pathname]);
 
-  const isActive = (href: string) => pathname === href;
-
+  const isActive = (href: string) => currentPath === href;
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -75,6 +77,7 @@ export default function Navbar() {
             </div>
           </Link>
 
+          {/* Desktop links */}
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
@@ -84,30 +87,23 @@ export default function Navbar() {
                   className="relative px-4 py-2"
                 >
                   <span
-                    className={`text-sm font-medium transition-colors ${
-                      isActive(link.href)
-                        ? "text-slate-900"
-                        : "text-slate-600 hover:text-slate-900"
-                    }`}
+                    className={`text-sm font-medium transition-colors text-slate-600 hover:text-slate-900`}
                   >
                     {link.label}
                   </span>
-                  {isActive(link.href) && (
-                    <motion.div
-                      layoutId="navbar-indicator"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-slate-900"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
+                  {/* <motion.div
+                    layoutId="navbar-indicator"
+                    className={`absolute bottom-0 left-0 right-0 h-0.5 bg-slate-900 transition-opacity ${
+                      isActive(link.href) ? "opacity-100" : "opacity-0"
+                    }`}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  /> */}
                 </motion.div>
               </Link>
             ))}
           </div>
 
+          {/* Desktop CTA */}
           <div className="hidden lg:block">
             <Link href="/contact">
               <motion.div
@@ -121,6 +117,7 @@ export default function Navbar() {
             </Link>
           </div>
 
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden p-2 rounded-md text-slate-900 hover:bg-slate-100"
@@ -130,6 +127,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
