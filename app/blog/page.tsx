@@ -4,30 +4,12 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Calendar, User, ArrowRight } from "lucide-react";
-import { supabase, BlogPost } from "@/lib/supabase";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
 
 export default function BlogPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
-    const { data, error } = await supabase
-      .from("blog_posts")
-      .select("*")
-      .eq("status", "published")
-      .order("published_at", { ascending: false });
-
-    if (!error && data) {
-      setPosts(data);
-    }
-    setLoading(false);
-  };
 
   return (
     <div className="pt-20">

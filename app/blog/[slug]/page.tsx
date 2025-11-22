@@ -1,41 +1,41 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Calendar, User, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-import { supabase, BlogPost } from '@/lib/supabase';
-import { Button } from '@/components/ui/button';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { motion } from "framer-motion";
+import { Calendar, User, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+// import { supabase, BlogPost } from '@/lib/supabase';
+import { Button } from "@/components/ui/button";
 
 export default function BlogPostPage() {
   const params = useParams();
-  const [post, setPost] = useState<BlogPost | null>(null);
+  const [post, setPost] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    if (params.slug) {
-      fetchPost(params.slug as string);
-    }
-  }, [params.slug]);
+  // useEffect(() => {
+  //   if (params.slug) {
+  //     fetchPost(params.slug as string);
+  //   }
+  // }, [params.slug]);
 
-  const fetchPost = async (slug: string) => {
-    const { data, error } = await supabase
-      .from('blog_posts')
-      .select('*')
-      .eq('slug', slug)
-      .eq('status', 'published')
-      .maybeSingle();
+  // const fetchPost = async (slug: string) => {
+  //   const { data, error } = await supabase
+  //     .from('blog_posts')
+  //     .select('*')
+  //     .eq('slug', slug)
+  //     .eq('status', 'published')
+  //     .maybeSingle();
 
-    if (!error && data) {
-      setPost(data);
-      await supabase.from('blog_posts').update({ views: data.views + 1 }).eq('id', data.id);
-    }
-    setLoading(false);
-  };
+  //   if (!error && data) {
+  //     setPost(data);
+  //     await supabase.from('blog_posts').update({ views: data.views + 1 }).eq('id', data.id);
+  //   }
+  //   setLoading(false);
+  // };
 
-  if (loading) return <div className="pt-32 text-center">Loading...</div>;
-  if (!post) return <div className="pt-32 text-center">Article not found</div>;
+  // if (loading) return <div className="pt-32 text-center">Loading...</div>;
+  // if (!post) return <div className="pt-32 text-center">Article not found</div>;
 
   return (
     <div className="pt-20">
@@ -47,9 +47,14 @@ export default function BlogPostPage() {
             </Button>
           </Link>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }}>
-            <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">{post.title}</h1>
-            
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h1 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-6">
+              {post.title}
+            </h1>
+
             <div className="flex items-center text-sm text-slate-600 mb-8 space-x-6">
               <span className="flex items-center">
                 <User className="w-4 h-4 mr-2" />
@@ -57,21 +62,21 @@ export default function BlogPostPage() {
               </span>
               <span className="flex items-center">
                 <Calendar className="w-4 h-4 mr-2" />
-                {new Date(post.published_at || '').toLocaleDateString('id-ID', {
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric',
+                {new Date(post.published_at || "").toLocaleDateString("id-ID", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
                 })}
               </span>
               <span>{post.reading_time} min read</span>
             </div>
 
             <div className="prose prose-lg max-w-none">
-              {post.content.split('\n').map((paragraph, index) => (
+              {/* {post.content.split('\n').map((paragraph, index) => (
                 <p key={index} className="mb-4 text-slate-700 leading-relaxed">
                   {paragraph}
                 </p>
-              ))}
+              ))} */}
             </div>
           </motion.div>
         </div>

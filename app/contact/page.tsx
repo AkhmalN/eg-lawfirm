@@ -6,7 +6,6 @@ import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { supabase } from "@/lib/supabase";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
 
@@ -25,22 +24,22 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      const { error } = await supabase
-        .from("contact_submissions")
-        .insert([formData]);
+    // try {
+    //   const { error } = await supabase
+    //     .from("contact_submissions")
+    //     .insert([formData]);
 
-      if (error) throw error;
+    //   if (error) throw error;
 
-      setSubmitted(true);
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-      setTimeout(() => setSubmitted(false), 5000);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Failed to submit form. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+    //   setSubmitted(true);
+    //   setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    //   setTimeout(() => setSubmitted(false), 5000);
+    // } catch (error) {
+    //   console.error("Error submitting form:", error);
+    //   alert("Failed to submit form. Please try again.");
+    // } finally {
+    //   setIsSubmitting(false);
+    // }
   };
 
   return (
