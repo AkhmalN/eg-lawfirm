@@ -8,6 +8,7 @@ import Link from "next/link";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import {
   Shield,
   Scale,
@@ -66,11 +67,19 @@ export default function ExpertiseCarousel() {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1280, // xl
+        settings: { slidesToShow: 3 },
+      },
+      {
+        breakpoint: 1024, // lg
         settings: { slidesToShow: 2 },
       },
       {
-        breakpoint: 640,
+        breakpoint: 768, // md
+        settings: { slidesToShow: 1 },
+      },
+      {
+        breakpoint: 480, // sm
         settings: { slidesToShow: 1 },
       },
     ],
@@ -81,7 +90,7 @@ export default function ExpertiseCarousel() {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, amount: 0.2 }}
-      className="py-24 bg-slate-50"
+      className="py-24 bg-slate-50 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
@@ -97,7 +106,7 @@ export default function ExpertiseCarousel() {
         {/* Carousel */}
         <Slider {...settings} className="relative mb-12">
           {services.map((service, index) => (
-            <motion.div key={index} className="px-4">
+            <motion.div key={index} className="px-3 w-full">
               <Card className="h-full border-2 hover:border-slate-900 transition-all duration-300 hover:shadow-xl">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-slate-900 rounded-xl flex items-center justify-center mb-6">
@@ -111,7 +120,7 @@ export default function ExpertiseCarousel() {
                   </p>
                   <Link
                     href="/services"
-                    className="inline-flex items-center text-slate-900 font-semibold group-hover:translate-x-2 transition-transform"
+                    className="inline-flex items-center text-slate-900 font-semibold hover:translate-x-2 transition-transform"
                   >
                     Learn More
                     <ArrowRight className="ml-2 w-4 h-4" />
