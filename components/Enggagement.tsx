@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import LawBackground from "@/assets//lawyer-getin.jpg";
 import { Button } from "./ui/button";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function EngageToExceed() {
   return (
@@ -41,9 +42,11 @@ export default function EngageToExceed() {
           transition={{ duration: 0.6, delay: 0.5 }}
           className="inline-block"
         >
-          <Button className="border border-white text-white bg-transparent hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
-            Get in touch <ArrowRight className="w-4 h-4" />
-          </Button>
+          <Link href={"/contact"}>
+            <Button className="border border-white text-white bg-transparent hover:bg-white hover:text-slate-900 transition flex items-center gap-2">
+              Get in touch <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
         </motion.a>
       </div>
     </section>

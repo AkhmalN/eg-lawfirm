@@ -3,20 +3,22 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
+import BrandLogo from "@/assets/logo-brand.png";
 
 const publications = [
   {
     id: 1,
-    title: "DDP 9th Anniversary! #NewChapterGratefulJourney",
+    title: "lorem ipsum",
     date: "01/11/2025",
     category: "INFORMATION",
-    image: "/mnt/data/17ad214a-14ca-4e01-91e2-82c920fb163a.png",
+    image:
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=600&q=60",
     link: "#",
-    bgColor: "bg-gold-600", // will customize gold color below
+    bgColor: "bg-gold-600",
   },
   {
     id: 2,
-    title: "Dewi Djalal & Partners (DDP) remains steadfast in upholding ...",
+    title: "Lorem ipsum  ...",
     date: "31/10/2025",
     category: "INFORMATION",
     image:
@@ -26,7 +28,7 @@ const publications = [
   },
   {
     id: 3,
-    title: "DDP Team Plenary Session",
+    title: "Lorem ipsum",
     date: "29/10/2025",
     category: "INFORMATION",
     image:
@@ -65,8 +67,16 @@ export default function LastPublications() {
               >
                 <div className="relative group">
                   {/* Top bar */}
-                  <div className="absolute top-0 left-0 w-full bg-navy-900 text-white text-xs font-semibold uppercase py-2 px-3 z-10 flex items-center justify-center">
-                    DEWI DJALAL & PARTNERS
+                  <div className="absolute top-0 left-0 w-full bg-navy-900 text-white text-xs font-semibold uppercase py-2 px-3 z-10 flex items-center justify-start">
+                    <Image
+                      src={BrandLogo}
+                      alt="Brand Logo"
+                      width={BrandLogo.width}
+                      height={BrandLogo.height}
+                      className="w-16 h-16 object-contain"
+                      priority
+                    />
+                    <p>Elmon Gultom</p>
                   </div>
                   <div className="relative w-full aspect-[4/3] brightness-90 group-hover:brightness-100 transition">
                     <Image
@@ -79,13 +89,7 @@ export default function LastPublications() {
                   </div>
                 </div>
 
-                <div
-                  className={`${
-                    id === 1
-                      ? "bg-gold-600 text-white"
-                      : "bg-navy-900 text-white"
-                  } p-5 flex flex-col flex-grow justify-between`}
-                >
+                <div className={`p-5 flex flex-col flex-grow justify-between`}>
                   <div>
                     <div className="text-xs font-semibold uppercase mb-1 opacity-80">
                       {category} • {date}

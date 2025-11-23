@@ -23,23 +23,6 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    // try {
-    //   const { error } = await supabase
-    //     .from("contact_submissions")
-    //     .insert([formData]);
-
-    //   if (error) throw error;
-
-    //   setSubmitted(true);
-    //   setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    //   setTimeout(() => setSubmitted(false), 5000);
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    //   alert("Failed to submit form. Please try again.");
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
   };
 
   return (

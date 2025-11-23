@@ -22,67 +22,82 @@ import { Button } from "@/components/ui/button";
 export default function ExpertiseCarousel() {
   const services = [
     {
-      icon: Building2,
       title: "Hukum Perusahaan",
       description:
         "Layanan hukum komprehensif untuk entitas bisnis, merger, akuisisi, dan tata kelola perusahaan.",
+      image:
+        "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Scale,
       title: "Litigasi Perdata",
       description:
         "Perwakilan ahli dalam penyelesaian sengketa dan proses pengadilan dengan rekam jejak terbukti.",
+      image:
+        "https://images.unsplash.com/photo-1528747045269-390fe33c19d3?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: FileText,
       title: "Hukum Kontrak",
       description:
         "Menyusun, meninjau, dan merundingkan kontrak untuk melindungi kepentingan Anda dan meminimalkan risiko.",
+      image:
+        "https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Users,
       title: "Hukum Ketenagakerjaan",
       description:
         "Menangani masalah hukum di tempat kerja, sengketa perburuhan, dan masalah kontrak kerja.",
+      image:
+        "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Shield,
       title: "Kepatuhan Regulasi",
       description:
         "Memastikan operasi bisnis mematuhi peraturan dan persyaratan hukum di Indonesia.",
+      image:
+        "https://images.unsplash.com/photo-1529572333334-04a19bb13f77?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Briefcase,
       title: "Properti & Real Estat",
       description:
         "Dukungan hukum untuk transaksi properti, sengketa tanah, dan pengembangan real estat.",
+      image:
+        "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=60",
     },
   ];
+
+  function NextArrow(props: any) {
+    const { onClick } = props;
+    return (
+      <div
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer bg-white border text-white p-3 rounded-full  transition"
+        onClick={onClick}
+      >
+        <ArrowRight className="w-5 h-5 text-slate-700" />
+      </div>
+    );
+  }
+
+  function PrevArrow(props: any) {
+    const { onClick } = props;
+    return (
+      <div
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer bg-white border text-white p-3 rounded-full  transition"
+        onClick={onClick}
+      >
+        {/* putar 180° */}
+        <ArrowRight className="w-5 h-5 rotate-180 text-slate-700" />
+      </div>
+    );
+  }
 
   const settings = {
     dots: true,
     infinite: true,
     speed: 600,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1280, // xl
-        settings: { slidesToShow: 3 },
-      },
-      {
-        breakpoint: 1024, // lg
-        settings: { slidesToShow: 2 },
-      },
-      {
-        breakpoint: 768, // md
-        settings: { slidesToShow: 1 },
-      },
-      {
-        breakpoint: 480, // sm
-        settings: { slidesToShow: 1 },
-      },
-    ],
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
   };
 
   return (
@@ -94,7 +109,7 @@ export default function ExpertiseCarousel() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <motion.div className="text-center mb-16">
+        <motion.div className="text-center mb-5">
           <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
             Bidang Keahlian Kami
           </h2>
@@ -107,20 +122,28 @@ export default function ExpertiseCarousel() {
         <Slider {...settings} className="relative mb-12">
           {services.map((service, index) => (
             <motion.div key={index} className="px-3 w-full">
-              <Card className="h-full border-2 hover:border-slate-900 transition-all duration-300 hover:shadow-xl">
-                <CardContent className="p-8">
-                  <div className="w-16 h-16 bg-slate-900 rounded-xl flex items-center justify-center mb-6">
-                    <service.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-slate-900 mb-3">
+              <Card className="relative h-[320px] overflow-hidden rounded-xl border-0 shadow-lg">
+                {/* Background image */}
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-50"
+                  style={{ backgroundImage: `url(${service.image})` }}
+                />
+
+                {/* Optional dark overlay biar teks lebih jelas */}
+                <div className="absolute inset-0 bg-black/30" />
+
+                {/* TEXT */}
+                <CardContent className="relative z-10 p-10">
+                  <h3 className="text-3xl font-bold text-white mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-slate-600 leading-relaxed mb-4">
+                  <p className="text-slate-100 leading-relaxed mb-4">
                     {service.description}
                   </p>
+
                   <Link
                     href="/services"
-                    className="inline-flex items-center text-slate-900 font-semibold hover:translate-x-2 transition-transform"
+                    className="inline-flex items-center text-white font-semibold hover:translate-x-2 transition-transform"
                   >
                     Learn More
                     <ArrowRight className="ml-2 w-4 h-4" />
