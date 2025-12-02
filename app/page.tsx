@@ -10,7 +10,7 @@ import ClientTestimonials from "@/components/Testimonial";
 import WhyChoose from "@/components/WhyChoose";
 import LastPublications from "@/components/LastPublications";
 import EngageToExceed from "@/components/Enggagement";
-import TeamSection from "@/components/Team";
+import LegalitasSection from "@/components/LegalitasSection";
 
 export default function Home() {
   return (
@@ -28,7 +28,8 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.8 }}
             className="text-4xl font-bold text-white drop-shadow-lg mb-6"
           >
-            Keunggulan dalam Layanan Hukum
+            “Mitra hukum terpercaya dalam menemukan keadilan dan menyelesaikan
+            setiap persoalan dengan integritas.”
           </motion.h2>
 
           <motion.div
@@ -44,9 +45,10 @@ export default function Home() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-lg text-white/90 leading-relaxed drop-shadow-md"
           >
-            Elmon Gultom menyediakan solusi hukum yang komprehensif dengan
-            keahlian, integritas, dan dedikasi untuk mencapai hasil terbaik bagi
-            klien kami.
+            Dengan pengalaman dan keahlian dalam berbagai bidang hukum, kami
+            hadir sebagai mitra strategis bagi klien dalam mencari keadilan,
+            menyelesaikan sengketa, serta memberikan perlindungan hukum yang
+            komprehensif dan profesional
           </motion.p>
         </div>
 
@@ -72,9 +74,9 @@ export default function Home() {
       <ExpertiseCarousel />
 
       <WhyChoose />
-      <TeamSection />
-      <ClientTestimonials />
-      <LastPublications />
+      <LegalitasSection />
+      {/* <ClientTestimonials />
+      <LastPublications /> */}
       <EngageToExceed />
     </div>
   );

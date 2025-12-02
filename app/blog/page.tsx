@@ -9,7 +9,6 @@ import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
 
 export default function BlogPage() {
   const [posts, setPosts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
 
   return (
     <div className="pt-20">
@@ -41,7 +40,7 @@ export default function BlogPage() {
         className="py-24 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
+          {/* {loading ? (
             <div className="text-center text-slate-600">
               Loading articles...
             </div>
@@ -86,7 +85,7 @@ export default function BlogPage() {
                 </motion.div>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </motion.section>
     </div>

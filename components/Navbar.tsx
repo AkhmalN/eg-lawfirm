@@ -10,10 +10,10 @@ import BrandLogo from "@/assets/logo-brand.png";
 import Image from "next/image";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About Us" },
-  { href: "/services", label: "Services" },
-  { href: "/team", label: "Team" },
+  { href: "/", label: "Beranda" },
+  { href: "/about", label: "Tentang Kami" },
+  { href: "/services", label: "Pelayanan" },
+  { href: "/team", label: "Tim Kami" },
   { href: "/portfolio", label: "Portfolio" },
   { href: "/blog", label: "Insights" },
   { href: "/contact", label: "Contact" },
@@ -68,11 +68,11 @@ export default function Navbar() {
             </motion.div>
 
             <div className="flex flex-col">
-              <span className="text-xl font-bold text-slate-900 tracking-tight">
-                Elmon Gultom
+              <span className="text-md font-bold text-slate-900 tracking-tight">
+                Lawyer.
               </span>
               <span className="text-xs text-slate-600 tracking-wide">
-                Law Firm
+                Legal Consultant
               </span>
             </div>
           </Link>

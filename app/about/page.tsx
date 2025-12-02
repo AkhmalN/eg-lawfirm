@@ -48,11 +48,11 @@ export default function AboutPage() {
             className="text-center"
           >
             <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              About Elmon Gultom Law Firm
+              Tentang Kami
             </h1>
             <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              A trusted legal partner delivering comprehensive solutions for
-              over 15 years
+              “Mitra hukum terpercaya dalam menemukan keadilan dan menyelesaikan
+              setiap persoalan dengan integritas.
             </p>
           </motion.div>
         </div>
@@ -73,25 +73,21 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-slate-600 leading-relaxed">
                 <p>
-                  Founded in 2008, Elmon Gultom Law Firm has grown from a small
-                  practice into one of Indonesia`s most respected legal service
-                  providers. Our journey has been marked by unwavering
-                  dedication to our clients and an uncompromising commitment to
-                  legal excellence.
+                  EG Law Firm (Elmon Gultom Law Firm) merupakan kantor hukum
+                  profesional yang berfokus pada pemberian layanan jasa hukum
+                  secara komprehensif, strategis, dan berintegritas tinggi.
+                  Berkantor di Jakarta dan Bali, kami hadir untuk memenuhi
+                  kebutuhan klien perorangan maupun korporasi dengan pendekatan
+                  hukum yang modern, solutif, dan berorientasi pada hasil.
                 </p>
                 <p>
-                  Under the leadership of Dr. Elmon Gultom, S.H., M.H., our firm
-                  has successfully handled over 500 cases across various
-                  practice areas, maintaining an impressive 98% success rate. We
-                  pride ourselves on combining deep legal knowledge with
-                  practical business acumen to deliver solutions that truly
-                  work.
-                </p>
-                <p>
-                  Today, our team of experienced attorneys continues to provide
-                  strategic legal counsel to individuals, startups, and
-                  established corporations, helping them navigate complex legal
-                  landscapes with confidence.
+                  Didukung oleh advokat berpengalaman, EG Law Firm berkomitmen
+                  untuk memberikan pendampingan hukum yang efektif, responsif,
+                  dan sesuai dengan prinsip keadilan serta kode etik profesi.
+                  Dengan pemahaman mendalam terhadap dinamika regulasi dan
+                  perkembangan dunia bisnis, kami memastikan setiap langkah
+                  hukum yang kami ambil mampu memberikan perlindungan dan nilai
+                  tambah bagi klien
                 </p>
               </div>
             </motion.div>
