@@ -1,173 +1,161 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Slider from "react-slick";
-import { Card, CardContent } from "@/components/ui/card";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import {
-  Shield,
-  Scale,
-  FileText,
-  Users,
-  Building2,
-  Briefcase,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function ExpertiseCarousel() {
-  const services = [
+export default function LegalCarousel() {
+  const items = [
     {
-      title: "Hukum Perusahaan",
-      description:
-        "Layanan hukum komprehensif untuk entitas bisnis, merger, akuisisi, dan tata kelola perusahaan.",
+      category: "Litigasi",
+      title: "Perdata",
       image:
-        "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&w=1200&q=60",
+        "https://images.unsplash.com/photo-1603796846097-bee99e4a601f?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      title: "Litigasi Perdata",
-      description:
-        "Perwakilan ahli dalam penyelesaian sengketa dan proses pengadilan dengan rekam jejak terbukti.",
+      category: "Litigasi",
+      title: "Pidana",
       image:
-        "https://images.unsplash.com/photo-1528747045269-390fe33c19d3?auto=format&fit=crop&w=1200&q=60",
+        "https://images.unsplash.com/photo-1661342406509-064b58299ca5?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      title: "Hukum Kontrak",
-      description:
-        "Menyusun, meninjau, dan merundingkan kontrak untuk melindungi kepentingan Anda dan meminimalkan risiko.",
+      category: "Non-Litigasi",
+      title: "Drafting & Review Kontrak",
       image:
-        "https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?auto=format&fit=crop&w=1200&q=60",
+        "https://images.unsplash.com/photo-1562564055-71e051d33c19?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      title: "Hukum Ketenagakerjaan",
-      description:
-        "Menangani masalah hukum di tempat kerja, sengketa perburuhan, dan masalah kontrak kerja.",
+      category: "Non-Litigasi",
+      title: "Legal Opinion",
       image:
-        "https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&q=60",
+        "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      title: "Kepatuhan Regulasi",
-      description:
-        "Memastikan operasi bisnis mematuhi peraturan dan persyaratan hukum di Indonesia.",
+      category: "Litigasi",
+      title: "Sengketa Bisnis & Komersial",
       image:
-        "https://images.unsplash.com/photo-1529572333334-04a19bb13f77?auto=format&fit=crop&w=1200&q=60",
+        "https://images.unsplash.com/photo-1681505531034-8d67054e07f6?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      title: "Properti & Real Estat",
-      description:
-        "Dukungan hukum untuk transaksi properti, sengketa tanah, dan pengembangan real estat.",
+      category: "Hukum Ketenagakerjaan",
+      title: "Industrial Relations",
       image:
-        "https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=60",
+        "https://images.unsplash.com/photo-1573164574572-cb89e39749b4?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      category: "Corporate",
+      title: "Corporate & Compliance",
+      image:
+        "https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=1200&q=60",
     },
   ];
 
-  function NextArrow(props: any) {
-    const { onClick } = props;
-    return (
-      <div
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer bg-white border text-white p-3 rounded-full  transition"
-        onClick={onClick}
-      >
-        <ArrowRight className="w-5 h-5 text-slate-700" />
-      </div>
-    );
-  }
-
-  function PrevArrow(props: any) {
-    const { onClick } = props;
-    return (
-      <div
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 cursor-pointer bg-white border text-white p-3 rounded-full  transition"
-        onClick={onClick}
-      >
-        {/* putar 180° */}
-        <ArrowRight className="w-5 h-5 rotate-180 text-slate-700" />
-      </div>
-    );
-  }
-
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 600,
-    slidesToShow: 1,
+    autoplay: true,
+    autoplaySpeed: 3200,
+    speed: 900,
+    slidesToShow: 5,
     slidesToScroll: 1,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    arrows: false,
+    pauseOnHover: false,
+    responsive: [
+      {
+        breakpoint: 1280, // lg
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 1024, // md
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 768, // sm
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 480, // xs
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
 
   return (
-    <motion.section
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true, amount: 0.2 }}
-      className="py-24 bg-slate-50 overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div className="text-center mb-5">
-          <h2 className="text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
-            Bidang Keahlian Kami
-          </h2>
-          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-            Bidang praktik kami mencakup berbagai industri dan disiplin hukum.
-          </p>
-        </motion.div>
+    <section className="md:px-10 bg-white w-full">
+      {/* HEADER */}
+      <div className="text-start mb-12 px-4 sm:px-6 max-w-4xl">
+        <h2 className="text-3xl sm:text-4xl font-semibold text-slate-900 mb-3 tracking-tight">
+          Layanan Hukum & Litigasi
+        </h2>
 
-        {/* Carousel */}
-        <Slider {...settings} className="relative mb-12">
-          {services.map((service, index) => (
-            <motion.div key={index} className="px-3 w-full">
-              <Card className="relative h-[320px] overflow-hidden rounded-xl border-0 shadow-lg">
-                {/* Background image */}
+        <div className="w-24 h-[2px] bg-yellow-600 mb-4" />
+
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
+          Tim hukum kami menangani berbagai perkara litigasi dan non-litigasi,
+          dengan pendekatan analitis, strategis, dan berorientasi pada solusi
+          untuk melindungi kepentingan hukum klien.
+        </p>
+      </div>
+
+      {/* FULLWIDTH CAROUSEL */}
+      <div className="w-full">
+        <Slider {...settings}>
+          {items.map((item, index) => (
+            <div key={index} className="px-2">
+              <div className="relative h-[250px] sm:h-[380px] overflow-hidden group shadow-md rounded-xl">
+                {/* Background */}
                 <div
-                  className="absolute inset-0 bg-cover bg-center opacity-50"
-                  style={{ backgroundImage: `url(${service.image})` }}
+                  className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${item.image})` }}
                 />
 
-                {/* Optional dark overlay biar teks lebih jelas */}
-                <div className="absolute inset-0 bg-black/30" />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-black/40" />
 
-                {/* TEXT */}
-                <CardContent className="relative z-10 p-10">
-                  <h3 className="text-3xl font-bold text-white mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-slate-100 leading-relaxed mb-4">
-                    {service.description}
+                {/* Content */}
+                <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-3 sm:px-4">
+                  <p className="text-sm sm:text-lg uppercase tracking-wide opacity-90 mb-2 sm:mb-3">
+                    {item.category}
                   </p>
 
-                  <Link
-                    href="/services"
-                    className="inline-flex items-center text-white font-semibold hover:translate-x-2 transition-transform"
-                  >
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </Link>
-                </CardContent>
-              </Card>
-            </motion.div>
+                  <div className="w-16 h-[1px] bg-white/50 mb-2 sm:mb-3" />
+
+                  <h3 className="text-lg sm:text-2xl font-semibold tracking-wide leading-snug">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
+            </div>
           ))}
         </Slider>
-
-        {/* View All Services Button */}
-        <div className="text-center mt-8">
-          <Link href="/services">
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white"
-            >
-              View All Services
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-          </Link>
-        </div>
       </div>
-    </motion.section>
+
+      {/* LINK */}
+      <div className="text-center mt-12">
+        <Link
+          href="/services"
+          className="inline-flex items-center text-slate-900 group font-medium text-base sm:text-lg"
+        >
+          <span className="relative">
+            Lihat Semua Pelayanan
+            <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-slate-900 transition-all duration-300 group-hover:w-full"></span>
+          </span>
+
+          <ArrowRight className="ml-2 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
+    </section>
   );
 }

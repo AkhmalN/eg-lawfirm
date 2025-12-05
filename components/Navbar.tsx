@@ -13,10 +13,7 @@ const navLinks = [
   { href: "/", label: "Beranda" },
   { href: "/about", label: "Tentang Kami" },
   { href: "/services", label: "Pelayanan" },
-  { href: "/team", label: "Tim Kami" },
-  { href: "/portfolio", label: "Portfolio" },
-  { href: "/blog", label: "Insights" },
-  { href: "/contact", label: "Contact" },
+  { href: "/contact", label: "Kontak" },
 ];
 
 export default function Navbar() {
@@ -69,7 +66,7 @@ export default function Navbar() {
 
             <div className="flex flex-col">
               <span className="text-md font-bold text-slate-900 tracking-tight">
-                Lawyer.
+                Elmongultom
               </span>
               <span className="text-xs text-slate-600 tracking-wide">
                 Legal Consultant
@@ -101,20 +98,6 @@ export default function Navbar() {
                 </motion.div>
               </Link>
             ))}
-          </div>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:block">
-            <Link href="/contact">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button className="bg-slate-900 text-white hover:bg-slate-800">
-                  Free Consultation
-                </Button>
-              </motion.div>
-            </Link>
           </div>
 
           {/* Mobile toggle */}

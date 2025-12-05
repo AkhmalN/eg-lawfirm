@@ -4,6 +4,10 @@ import { motion } from "framer-motion";
 import { Target, Eye, Heart, Award, Users, TrendingUp } from "lucide-react";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
+import Lawyer from "@/assets/companies-people.jpg";
+import LawyerPendiri from "@/assets/pendiri.jpeg";
+import Image from "next/image";
+import SectionDivider from "@/components/SectionDivider";
 
 export default function AboutPage() {
   const values = [
@@ -37,24 +41,30 @@ export default function AboutPage() {
 
   return (
     <div className="pt-20">
+      {/* Hero Section */}
       <section
-        className="py-24  text-white"
+        className="py-32 text-white relative bg-cover bg-center"
         style={{ backgroundImage: `url(${LawBackground.src})` }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative max-w-4xl mx-auto text-center px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
+            transition={{ duration: 1 }}
+            className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              Tentang Kami
-            </h1>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              “Mitra hukum terpercaya dalam menemukan keadilan dan menyelesaikan
-              setiap persoalan dengan integritas.
-            </p>
-          </motion.div>
+            Tentang Kami
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="text-xl sm:text-2xl text-slate-200"
+          >
+            Mitra hukum terpercaya dalam menemukan keadilan dan menyelesaikan
+            setiap persoalan dengan integritas.
+          </motion.p>
         </div>
       </section>
 
@@ -94,21 +104,76 @@ export default function AboutPage() {
 
             <motion.div variants={fadeInUp} className="relative">
               <div className="aspect-square bg-slate-100 rounded-2xl overflow-hidden">
-                <div className="h-full flex items-center justify-center text-slate-400">
-                  <Award className="w-32 h-32" />
+                <div className="w-full h-full flex items-center justify-center text-slate-400">
+                  <Image
+                    src={Lawyer}
+                    alt={`Partner `}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
       </motion.section>
-
+      <SectionDivider />
       <motion.section
         variants={staggerContainer}
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
-        className="py-24 bg-slate-50"
+        className=""
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div variants={fadeInUp} className="relative">
+              <div className="aspect-square rounded-2xl overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center text-slate-400">
+                  <Image
+                    src={LawyerPendiri}
+                    alt={`Elmon Gultom, S.H., M.H.`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </motion.div>
+            <motion.div variants={fadeInUp}>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6">
+                Pendiri Kami
+              </h2>
+              <div className="space-y-4 text-slate-600 leading-relaxed">
+                <p>
+                  <strong>Elmon Gultom, S.H., M.H.</strong> adalah Managing
+                  Partner sekaligus pendiri EG Law Firm.
+                </p>
+                <p>
+                  Sebagai pendiri EG Law Firm, beliau memiliki pengalaman dalam
+                  menangani berbagai perkara hukum baik litigasi maupun
+                  non-litigasi. Dedikasi terhadap keadilan, kemampuan negosiasi
+                  yang kuat, serta pemahaman mendalam mengenai hukum di
+                  Indonesia menjadikan EG Law Firm partner terpercaya bagi
+                  setiap klien.
+                </p>
+                <p>
+                  Dengan rekam jejak dalam mewakili klien dari berbagai sektor,
+                  beliau selalu mengedepankan analisis yang tajam, strategi yang
+                  tepat, serta penyelesaian yang berfokus pada hasil terbaik
+                  bagi klien.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+      <SectionDivider />
+      <motion.section
+        variants={staggerContainer}
+        initial="initial"
+        whileInView="animate"
+        viewport={{ once: true }}
+        className=""
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16">
@@ -143,13 +208,13 @@ export default function AboutPage() {
           </div>
         </div>
       </motion.section>
-
+      <SectionDivider />
       <motion.section
         variants={staggerContainer}
         initial="initial"
         whileInView="animate"
         viewport={{ once: true }}
-        className="py-24 bg-white"
+        className="pb-16 bg-white"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div variants={fadeInUp} className="text-center mb-16">

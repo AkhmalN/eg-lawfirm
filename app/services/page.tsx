@@ -1,167 +1,279 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Building2,
-  Scale,
-  FileText,
-  Users,
-  Shield,
-  Briefcase,
-  ArrowRight,
-} from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { fadeInUp, staggerContainer } from "@/lib/motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
+import { Scale } from "lucide-react";
 
 export default function ServicesPage() {
-  const services = [
+  // ====== Array services per category ======
+  const mainServices = [
     {
-      icon: Building2,
-      title: "Hukum Perusahaan",
+      title: "Litigasi (Perdata, Pidana, Tata Usaha Negara)",
       description:
-        "Layanan hukum komprehensif untuk entitas bisnis, merger, akuisisi, tata kelola perusahaan, dan pembentukan perusahaan.",
-      features: [
-        "Pembentukan Perusahaan",
-        "Konsultasi Merger & Akuisisi",
-        "Tata Kelola Perusahaan",
-        "Perjanjian Pemegang Saham",
-      ],
+        "Pendampingan penuh dalam penyelesaian perkara di pengadilan, mulai dari penyusunan strategi hingga representasi resmi di setiap proses persidangan.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Scale,
-      title: "Litigasi Perdata",
+      title: "Non-Litigasi: Drafting & Review Kontrak",
       description:
-        "Perwakilan ahli dalam penyelesaian sengketa, proses pengadilan, arbitrase, dan mediasi dengan rekam jejak terbukti.",
-      features: [
-        "Perwakilan di Pengadilan",
-        "Arbitrase",
-        "Layanan Mediasi",
-        "Proses Banding",
-      ],
+        "Penyusunan dan peninjauan kontrak untuk memastikan setiap klausul melindungi kepentingan klien dan sesuai ketentuan hukum.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: FileText,
-      title: "Hukum Kontrak",
+      title: "Legal Opinion (Pendapat Hukum)",
       description:
-        "Menyusun, meninjau, dan merundingkan kontrak untuk melindungi kepentingan Anda dan meminimalkan risiko hukum.",
-      features: [
-        "Penyusunan Kontrak",
-        "Peninjauan Kontrak",
-        "Dukungan Negosiasi",
-        "Penyelesaian Pelanggaran Kontrak",
-      ],
+        "Analisis hukum tertulis yang memberikan panduan jelas, profesional, dan dapat dipertanggungjawabkan dalam pengambilan keputusan.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Users,
-      title: "Hukum Ketenagakerjaan",
+      title: "Legal Audit & Due Diligence",
       description:
-        "Menangani masalah hukum di tempat kerja, sengketa perburuhan, kontrak kerja, dan kepatuhan HR.",
-      features: [
-        "Kontrak Kerja",
-        "Sengketa Perburuhan",
-        "Kepatuhan HR",
-        "Masalah Pemutusan Hubungan Kerja",
-      ],
+        "Pemeriksaan menyeluruh terhadap dokumen dan kegiatan perusahaan untuk memastikan kepatuhan dan mengidentifikasi potensi risiko hukum.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Shield,
-      title: "Kepatuhan Regulasi",
+      title: "Mediasi & Negosiasi",
       description:
-        "Memastikan operasi bisnis mematuhi peraturan dan persyaratan hukum di Indonesia.",
-      features: [
-        "Audit Kepatuhan",
-        "Konsultasi Regulasi",
-        "Permohonan Izin",
-        "Hubungan dengan Pemerintah",
-      ],
+        "Pendekatan alternatif penyelesaian sengketa secara efektif dan efisien untuk mencapai kesepakatan terbaik tanpa melalui pengadilan.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
     },
     {
-      icon: Briefcase,
-      title: "Properti & Real Estat",
+      title: "Corporate Legal Services",
       description:
-        "Dukungan hukum untuk transaksi properti, sengketa tanah, perjanjian sewa, dan pengembangan real estat.",
-      features: [
-        "Transaksi Properti",
-        "Sengketa Tanah",
-        "Perjanjian Sewa",
-        "Proyek Pengembangan",
-      ],
+        "Layanan hukum bagi perusahaan, meliputi pendampingan operasional, kepatuhan, kontraktual, hingga penanganan sengketa bisnis.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
     },
   ];
 
+  const litigationServices = [
+    {
+      title: "Perkara Pidana",
+      description:
+        "Mewakili dan mendampingi client sebagai pelapor atau terlapor di penyelidikan, penyidikan, dan penuntutan Di Pengadilan, berbasis bukti dan fakta persidangan secara profesional.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Perkara Perdata",
+      description:
+        "Hal hal yang mencakup Perkara PMH, Wanprestasi, Sengketa bisnis, Perceraian, sengketa tanah, sengketa waris dan keluarga, Ketenagakerjaan.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Sengketa Tata Usaha Negara",
+      description:
+        "Mewakili klien dalam sengketa yang melibatkan keputusan administratif pemerintah untuk memastikan hak-hak klien terlindungi.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Judicial Review",
+      description:
+        "Hak uji materi atau proses pengujian peraturan perundang-undangan terhadap norma dalam suatu pasal di lembaga mahkamah konstitusi dan mahkamah agung.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "PHPU",
+      description:
+        "Perselisihan tentang hasil pemilihan umum antara KPU dan peserta pemilu mengenai penetapan perolehan suara hasil pemilu secara nasional di lembaga mahkamah konstitusi.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "PKPU",
+      description:
+        "Prosedur hukum untuk memberikan kesempatan kepada debitur yang tidak mampu membayar utangnya agar bisa merestrukturisasi kewajiban dan menghindari kebangkrutan (kepailitan) di Pengadilan Niaga.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Kepailitan",
+      description:
+        "Badan hukum yang tidak mampu membayar utang-utangnya yang sudah jatuh tempo ditetapkan melalui putusan pengadilan setelah diajukan permohonan oleh debitur atau kreditur di Pengadilan Niaga.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Arbitrase",
+      description:
+        "Penyelesaian sengketa di luar pengadilan umum yang didasarkan pada kesepakatan tertulis antara para pihak yang bersengketa untuk menyerahkan masalah mereka kepada satu atau lebih arbiter yang independen untuk diputuskan.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+  ];
+
+  const nonLitigationServices = [
+    {
+      title: "Pembuatan & Review Kontrak",
+      description:
+        "Penyusunan kontrak yang jelas, aman, dan legal untuk meminimalkan risiko dan memperjelas hubungan kerja sama.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Legal Drafting",
+      description:
+        "Penyusunan dokumen hukum yang akurat dan efektif, seperti kontrak, perjanjian, surat kuasa, dan wasiat. Prosesnya meliputi pengumpulan informasi, analisis, pembuatan draft, revisi, hingga finalisasi untuk memastikan hak-kewajiban jelas dan risiko sengketa dapat dihindari.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Legal Opinion",
+      description:
+        "Pemberian pendapat hukum berdasarkan fakta dan aturan yang berlaku untuk membantu klien mengambil keputusan tepat. Berisi analisis masalah, potensi risiko, serta rekomendasi tindakan dalam konteks transaksi bisnis, sengketa, ataupun kepatuhan hukum.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Legal Audit",
+      description:
+        "Pemeriksaan dokumen dan aktivitas hukum perusahaan untuk memastikan kepatuhan dan meminimalkan risiko. Meliputi evaluasi kontrak, HKI, ketenagakerjaan, pajak, serta aspek lingkungan guna meningkatkan efisiensi dan mengurangi potensi kerugian.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Legal Reasoning",
+      description:
+        "Proses analisis hukum secara logis dan sistematis: mengidentifikasi masalah, mengumpulkan fakta, menilai aturan dan argumen, lalu menarik kesimpulan hukum yang tepat.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Legislative Drafting",
+      description:
+        "Penyusunan peraturan dan norma hukum (UU, PP, Perda) secara sistematis agar jelas, memiliki kepastian hukum, dan minim salah tafsir.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Pembuatan SOP & Kebijakan",
+      description:
+        "Penyusunan SOP dan dokumen kebijakan operasional perusahaan, mulai dari rekrutmen, disiplin kerja, administrasi, rapat direksi, hingga manajemen kinerja dan penanganan konflik, guna memastikan sistem kerja yang tertib dan efektif.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+    {
+      title: "Legal Compliance",
+      description:
+        "Layanan kepatuhan hukum untuk memastikan bahwa perusahaan menjalankan kegiatan sesuai peraturan yang berlaku dan bebas dari potensi sengketa.",
+      image:
+        "https://images.unsplash.com/photo-1521791055366-0d553872125f?auto=format&fit=crop&w=1200&q=60",
+    },
+  ];
+
+  // ====== Function to render a section ======
+  const renderSection = (
+    title: string,
+    description: string,
+    servicesArray: any[]
+  ) => (
+    <section className="py-16 max-w-7xl mx-auto px-6 lg:px-8">
+      <div className="text-start mb-12 px-6 max-w-4xl">
+        <h2 className="text-4xl font-semibold text-slate-900 mb-3 tracking-tight">
+          {title}
+        </h2>
+
+        <div className="w-24 h-[2px] bg-yellow-600 mb-4" />
+
+        <p className="text-lg text-slate-600 leading-relaxed">{description}</p>
+      </div>
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {servicesArray.map((item, idx) => (
+          <div key={idx}>
+            <div className="relative h-[380px] overflow-hidden group rounded-2xl shadow-lg">
+              {/* Background Card Orange */}
+              <div className="absolute inset-0 bg-yellow-600 opacity-70 transition-all duration-700 hover:bg-yellow-900" />
+
+              {/* Overlay Noise saat hover */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-30 bg-white bg-[url('https://www.transparenttextures.com/patterns/white-paper.png')] pointer-events-none transition-opacity duration-500" />
+
+              {/* Icon Scale */}
+              <div className="absolute top-4 right-4 text-white">
+                <Scale size={32} />
+              </div>
+
+              {/* Bercak putih di kanan bawah */}
+              <div className="absolute bottom-4 right-4 flex space-x-2">
+                <div className="w-1.5 h-1.5 bg-white rounded-full opacity-30 animate-pulse delay-300"></div>
+                <div className="w-2 h-2 bg-white rounded-full opacity-40 animate-pulse delay-150"></div>
+                <div className="w-3 h-3 bg-white rounded-full opacity-50 animate-pulse"></div>
+              </div>
+              <div className="absolute bottom-4 left-4 flex space-x-2">
+                <div className="w-3 h-3 bg-white rounded-full opacity-50 animate-pulse"></div>
+                <div className="w-2 h-2 bg-white rounded-full opacity-40 animate-pulse delay-150"></div>
+                <div className="w-1.5 h-1.5 bg-white rounded-full opacity-30 animate-pulse delay-300"></div>
+              </div>
+
+              {/* Konten Card */}
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+                <h3 className="text-2xl font-semibold tracking-wide leading-snug">
+                  {item.title}
+                </h3>
+                <div className="w-24 h-[1px] bg-white/50 mb-3" />
+                <p className="mt-2 text-sm leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+
   return (
-    <div className="pt-20">
+    <div className="pt-20 bg-slate-50">
+      {/* Hero Section */}
       <section
-        className="py-24 text-white"
+        className="py-32 text-white relative bg-cover bg-center"
         style={{ backgroundImage: `url(${LawBackground.src})` }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative max-w-4xl mx-auto text-center px-6">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
+            transition={{ duration: 1 }}
+            className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight"
           >
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6">
-              Layanan Hukum
-            </h1>
-            <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-              Solusi hukum komprehensif yang disesuaikan dengan kebutuhan Anda
-            </p>
-          </motion.div>
+            Layanan Hukum Kami
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            className="text-xl sm:text-2xl text-slate-200"
+          >
+            Solusi hukum komprehensif yang disesuaikan dengan kebutuhan Anda,
+            dengan pendekatan profesional dan berintegritas.
+          </motion.p>
         </div>
       </section>
 
-      <motion.section
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
-        className="py-24 bg-white"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                whileHover={{ y: -8 }}
-              >
-                <Card className="h-full border-2 hover:border-slate-900 transition-all hover:shadow-xl">
-                  <CardContent className="p-8">
-                    <service.icon className="w-12 h-12 text-slate-900 mb-4" />
-                    <h3 className="text-2xl font-bold text-slate-900 mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-slate-600 mb-4">{service.description}</p>
-                    <ul className="space-y-2 mb-4">
-                      {service.features.map((feature, i) => (
-                        <li
-                          key={i}
-                          className="text-sm text-slate-600 flex items-center"
-                        >
-                          <span className="w-1.5 h-1.5 bg-slate-900 rounded-full mr-2"></span>
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div variants={fadeInUp} className="text-center mt-16">
-            <Link href="/contact">
-              <Button size="lg" className="bg-slate-900 hover:bg-slate-800">
-                Minta Konsultasi <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </motion.section>
+      {/* Sections */}
+      {renderSection(
+        "Layanan Hukum Kami",
+        "Berbagai layanan hukum yang mencakup litigasi dan non-litigasi untuk kebutuhan individu dan perusahaan.",
+        mainServices
+      )}
+      {renderSection(
+        "Layanan Litigasi",
+        "Pendampingan hukum di pengadilan dan lembaga hukum lainnya, untuk melindungi hak dan kepentingan klien.",
+        litigationServices
+      )}
+      {renderSection(
+        "Layanan Non Litigasi",
+        "Layanan hukum preventif dan administratif, termasuk drafting, audit, compliance, dan kebijakan perusahaan.",
+        nonLitigationServices
+      )}
     </div>
   );
 }
