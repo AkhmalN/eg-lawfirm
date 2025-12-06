@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { fadeInUp, staggerContainer } from "@/lib/motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 function HeroContact() {
   return (
@@ -217,22 +219,26 @@ function ContactForm() {
 
 export default function ContactPage() {
   return (
-    <div className="pt-20 bg-slate-50">
-      <HeroContact />
-      <motion.section
-        variants={staggerContainer}
-        initial="initial"
-        whileInView="animate"
-        viewport={{ once: true }}
-        className="py-24"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16">
-            <ContactInfo />
-            <ContactForm />
+    <div>
+      <Navbar />
+      <div className="pt-20 bg-slate-50">
+        <HeroContact />
+        <motion.section
+          variants={staggerContainer}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="py-24"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-2 gap-16">
+              <ContactInfo />
+              <ContactForm />
+            </div>
           </div>
-        </div>
-      </motion.section>
+        </motion.section>
+      </div>
+      <Footer />
     </div>
   );
 }

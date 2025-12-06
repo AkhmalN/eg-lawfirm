@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
 import { Scale } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export default function ServicesPage() {
   // ====== Array services per category ======
@@ -230,50 +232,54 @@ export default function ServicesPage() {
   );
 
   return (
-    <div className="pt-20 bg-slate-50">
-      {/* Hero Section */}
-      <section
-        className="py-32 text-white relative bg-cover bg-center"
-        style={{ backgroundImage: `url(${LawBackground.src})` }}
-      >
-        <div className="absolute inset-0 bg-black/50"></div>
-        <div className="relative max-w-4xl mx-auto text-center px-6">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight"
-          >
-            Layanan Hukum Kami
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 1 }}
-            className="text-xl sm:text-2xl text-slate-200"
-          >
-            Solusi hukum komprehensif yang disesuaikan dengan kebutuhan Anda,
-            dengan pendekatan profesional dan berintegritas.
-          </motion.p>
-        </div>
-      </section>
+    <div>
+      <Navbar />
+      <div className="pt-20 bg-slate-50">
+        {/* Hero Section */}
+        <section
+          className="py-32 text-white relative bg-cover bg-center"
+          style={{ backgroundImage: `url(${LawBackground.src})` }}
+        >
+          <div className="absolute inset-0 bg-black/50"></div>
+          <div className="relative max-w-4xl mx-auto text-center px-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight"
+            >
+              Layanan Hukum Kami
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 1 }}
+              className="text-xl sm:text-2xl text-slate-200"
+            >
+              Solusi hukum komprehensif yang disesuaikan dengan kebutuhan Anda,
+              dengan pendekatan profesional dan berintegritas.
+            </motion.p>
+          </div>
+        </section>
 
-      {/* Sections */}
-      {renderSection(
-        "Layanan Hukum Kami",
-        "Berbagai layanan hukum yang mencakup litigasi dan non-litigasi untuk kebutuhan individu dan perusahaan.",
-        mainServices
-      )}
-      {renderSection(
-        "Layanan Litigasi",
-        "Pendampingan hukum di pengadilan dan lembaga hukum lainnya, untuk melindungi hak dan kepentingan klien.",
-        litigationServices
-      )}
-      {renderSection(
-        "Layanan Non Litigasi",
-        "Layanan hukum preventif dan administratif, termasuk drafting, audit, compliance, dan kebijakan perusahaan.",
-        nonLitigationServices
-      )}
+        {/* Sections */}
+        {renderSection(
+          "Layanan Hukum Kami",
+          "Berbagai layanan hukum yang mencakup litigasi dan non-litigasi untuk kebutuhan individu dan perusahaan.",
+          mainServices
+        )}
+        {renderSection(
+          "Layanan Litigasi",
+          "Pendampingan hukum di pengadilan dan lembaga hukum lainnya, untuk melindungi hak dan kepentingan klien.",
+          litigationServices
+        )}
+        {renderSection(
+          "Layanan Non Litigasi",
+          "Layanan hukum preventif dan administratif, termasuk drafting, audit, compliance, dan kebijakan perusahaan.",
+          nonLitigationServices
+        )}
+      </div>
+      <Footer />
     </div>
   );
 }

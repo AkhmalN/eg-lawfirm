@@ -10,10 +10,13 @@ import ClientsSection from "@/components/ClientsSection";
 import PartnersSection from "@/components/PartnerSection";
 import HeroSection from "@/components/HeroSection";
 import SectionDivider from "@/components/SectionDivider";
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div className="overflow-hidden">
+      <Navbar />
       <HeroSection />
       <SectionDivider />
       <ExpertiseCarousel />
@@ -26,6 +29,7 @@ export default function Home() {
       <SectionDivider />
       <ClientsSection />
       <EngageToExceed />
+      <Footer />
     </div>
   );
 }

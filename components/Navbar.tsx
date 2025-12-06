@@ -37,6 +37,7 @@ export default function Navbar() {
   }, [pathname]);
 
   const isActive = (href: string) => currentPath === href;
+
   return (
     <motion.nav
       initial={{ y: -100 }}
