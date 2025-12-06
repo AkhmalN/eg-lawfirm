@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Home, FileText, LogOut, Menu, X } from "lucide-react";
 import Image from "next/image";
 import BrandLogo from "@/assets/logo-brand.png";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function AdminLayout({
   children,
@@ -98,12 +99,7 @@ export default function AdminLayout({
         </nav>
 
         {/* Logout */}
-        <form action="/api/auth/logout" method="POST" className="mt-auto">
-          <button className="flex items-center gap-2 w-full px-4 py-2 rounded-lg bg-red-600 text-white font-semibold hover:bg-red-700 transition">
-            <LogOut className="w-5 h-5" />
-            Logout
-          </button>
-        </form>
+        <LogoutButton />
       </aside>
 
       {/* Main content */}

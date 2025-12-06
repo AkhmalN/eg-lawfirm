@@ -48,7 +48,11 @@ export default function AdminDashboard() {
   async function fetchStats() {
     try {
       setRefreshing(true);
-      const [statsRes] = await Promise.all([fetch("/api/stats")]);
+
+      const statsRes = await fetch("/api/stats", {
+        cache: "no-store",
+      });
+
       if (!statsRes.ok) throw new Error("Failed to fetch stats");
 
       const statsData = await statsRes.json();
