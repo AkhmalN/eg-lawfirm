@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getDbConnection } from "@/lib/db";
 import { TNewsDTO } from "@/types/news";
 import { cloudinaryUploader } from "@/lib/cloudinary";
+import { RowDataPacket } from "mysql2";
 
 export async function GET(
   req: NextRequest,
@@ -69,9 +70,10 @@ export async function PUT(
     } else {
       // Tidak ada file baru, pakai image lama
       // imageUrl = existingNews.image;
-      const [rows] = await conn.execute("SELECT image FROM News WHERE id = ?", [
-        params.id,
-      ]);
+      const [rows] = await conn.execute<RowDataPacket[]>(
+        "SELECT image FROM News WHERE id = ?",
+        [params.id]
+      );
       console.log("rows", rows);
       // get news
       const existingNews =

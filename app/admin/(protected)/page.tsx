@@ -48,19 +48,12 @@ export default function AdminDashboard() {
   async function fetchStats() {
     try {
       setRefreshing(true);
-      const [statsRes, newsRes] = await Promise.all([
-        fetch("/api/stats"),
-        fetch("/api/news?limit=5&sort=desc"),
-      ]);
-
+      const [statsRes] = await Promise.all([fetch("/api/stats")]);
       if (!statsRes.ok) throw new Error("Failed to fetch stats");
-      if (!newsRes.ok) throw new Error("Failed to fetch recent news");
 
       const statsData = await statsRes.json();
-      const newsData = await newsRes.json();
 
       setStats(statsData);
-      setRecentNews(newsData);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
