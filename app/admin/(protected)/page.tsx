@@ -19,6 +19,7 @@ import {
   Loader2,
 } from "lucide-react";
 import Link from "next/link";
+import { TNewsDTO } from "@/types/news";
 
 interface Stats {
   total_news: number;
@@ -44,6 +45,9 @@ export default function AdminDashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [recentNews, setRecentNews] = useState<NewsItem[]>([]);
   const [timeRange, setTimeRange] = useState<"day" | "week" | "month">("week");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 6;
 
   async function fetchStats() {
     try {
@@ -66,8 +70,26 @@ export default function AdminDashboard() {
     }
   }
 
+  const fetchNews = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/news?page=${page}&limit=${limit}`);
+      const json = await res.json();
+      setRecentNews(json.data);
+      setTotalPages(json.pagination.totalPages);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchStats();
+  }, []);
+
+  useEffect(() => {
+    fetchNews();
   }, []);
 
   const handleRefresh = () => {

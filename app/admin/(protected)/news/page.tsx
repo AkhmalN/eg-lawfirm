@@ -13,6 +13,8 @@ import {
   ChevronDown,
   Loader2,
   Plus,
+  ArrowLeft,
+  ArrowRight,
 } from "lucide-react";
 
 interface NewsItem {
@@ -36,19 +38,32 @@ export default function NewsList() {
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 10;
+
   async function loadNews() {
     setLoading(true);
     try {
-      const res = await fetch("/api/news");
+      const res = await fetch(`/api/news?page=${page}&limit=${limit}`);
       if (!res.ok) throw new Error("Failed to fetch news");
-      const data = await res.json();
-      setNews(data);
+      const json = await res.json();
+      setNews(json.data);
+      setTotalPages(json.pagination.totalPages);
     } catch (error) {
       console.error("Error loading news:", error);
     } finally {
       setLoading(false);
     }
   }
+
+  const handleNext = () => {
+    if (page < totalPages) setPage(page + 1);
+  };
+
+  const handlePrev = () => {
+    if (page > 1) setPage(page - 1);
+  };
 
   async function deleteNews(id: string) {
     if (!confirm("Are you sure you want to delete this news item?")) return;
@@ -82,7 +97,7 @@ export default function NewsList() {
 
   useEffect(() => {
     loadNews();
-  }, []);
+  }, [page]);
 
   // Filter and sort news
   const filteredNews = news
@@ -210,7 +225,7 @@ export default function NewsList() {
             </Link>
           </div>
         ) : (
-          <div className="overflow-x-auto">
+          <div className="overflow-x-auto py-2">
             <table className="w-full">
               <thead className="bg-gray-50 border-b border-gray-200">
                 <tr>
@@ -328,6 +343,26 @@ export default function NewsList() {
                 ))}
               </tbody>
             </table>
+            {/* Pagination */}
+            <div className="flex justify-end items-center gap-4 mt-10 px-3">
+              <button
+                onClick={handlePrev}
+                disabled={page === 1}
+                className="px-4 py-2 bg-[#CDA772] text-white rounded disabled:bg-gray-300"
+              >
+                <ArrowLeft />
+              </button>
+              <span className="text-slate-600">
+                Halaman {page} dari {totalPages}
+              </span>
+              <button
+                onClick={handleNext}
+                disabled={page === totalPages}
+                className="px-4 py-2 bg-[#CDA772] text-white rounded disabled:bg-gray-300"
+              >
+                <ArrowRight />
+              </button>
+            </div>
           </div>
         )}
       </div>

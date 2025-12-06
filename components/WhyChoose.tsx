@@ -65,7 +65,7 @@ const WhyChoose = () => {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, amount: 0.3 }}
-      className="bg-white w-full md:px-10"
+      className="bg-white w-full pt-16 md:px-10"
     >
       {/* Title */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-start">

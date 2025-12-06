@@ -3,13 +3,33 @@ import { getDbConnection } from "@/lib/db";
 import { cloudinaryUploader } from "@/lib/cloudinary";
 import { TNewsDTO } from "@/types/news";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const page = parseInt(url.searchParams.get("page") || "1", 10);
+    const limit = parseInt(url.searchParams.get("limit") || "10", 10);
+    const offset = (page - 1) * limit;
+
     const conn = await getDbConnection();
-    const [rows] = await conn.execute(
-      "SELECT * FROM News ORDER BY createdAt DESC"
+
+    const [countResult] = await conn.execute(
+      "SELECT COUNT(*) as total FROM News"
     );
-    return NextResponse.json(rows);
+    const total = (countResult as any)[0].total;
+
+    const [rows] = await conn.execute(
+      `SELECT * FROM News ORDER BY createdAt DESC LIMIT ${limit} OFFSET ${offset}`
+    );
+
+    return NextResponse.json({
+      data: rows,
+      pagination: {
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      },
+    });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

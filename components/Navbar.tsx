@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/", label: "Beranda" },
   { href: "/about", label: "Tentang Kami" },
   { href: "/services", label: "Pelayanan" },
+  { href: "/news", label: "Berita & Publikasi" },
   { href: "/contact", label: "Kontak" },
 ];
 
@@ -149,7 +150,7 @@ export default function Navbar() {
               >
                 <Link href="/contact">
                   <Button className="w-full bg-slate-900 text-white hover:bg-slate-800">
-                    Free Consultation
+                    Konsultasi Sekarang
                   </Button>
                 </Link>
               </motion.div>

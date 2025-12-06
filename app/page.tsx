@@ -12,16 +12,19 @@ import HeroSection from "@/components/HeroSection";
 import SectionDivider from "@/components/SectionDivider";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import NewsSection from "@/components/NewsSection";
 
 export default function Home() {
   return (
     <div className="overflow-hidden">
       <Navbar />
       <HeroSection />
+      {/* <SectionDivider /> */}
+      <WhyChoose />
       <SectionDivider />
       <ExpertiseCarousel />
       <SectionDivider />
-      <WhyChoose />
+      <NewsSection />
       <SectionDivider />
       <LegalitasSection />
       <SectionDivider />
