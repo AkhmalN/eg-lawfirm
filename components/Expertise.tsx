@@ -1,12 +1,13 @@
 "use client";
 
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/autoplay";
+
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import { Button } from "@/components/ui/button";
 
 export default function LegalCarousel() {
   const items = [
@@ -54,44 +55,6 @@ export default function LegalCarousel() {
     },
   ];
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    autoplay: true,
-    autoplaySpeed: 3200,
-    speed: 900,
-    slidesToShow: 5,
-    slidesToScroll: 1,
-    arrows: false,
-    pauseOnHover: false,
-    responsive: [
-      {
-        breakpoint: 1280, // lg
-        settings: {
-          slidesToShow: 4,
-        },
-      },
-      {
-        breakpoint: 1024, // md
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768, // sm
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480, // xs
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
   return (
     <section className="md:px-10 bg-white w-full">
       {/* HEADER */}
@@ -109,38 +72,45 @@ export default function LegalCarousel() {
         </p>
       </div>
 
-      {/* FULLWIDTH CAROUSEL */}
-      <div className="w-full">
-        <Slider {...settings}>
-          {items.map((item, index) => (
-            <div key={index} className="px-2">
-              <div className="relative h-[250px] sm:h-[380px] overflow-hidden group shadow-md rounded-xl">
-                {/* Background */}
-                <div
-                  className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${item.image})` }}
-                />
+      {/* SWIPER CAROUSEL */}
+      <Swiper
+        modules={[Autoplay]}
+        autoplay={{ delay: 2500, disableOnInteraction: false }}
+        spaceBetween={16}
+        loop={true}
+        breakpoints={{
+          0: { slidesPerView: 1 }, // mobile
+          480: { slidesPerView: 1 }, // small mobile
+          640: { slidesPerView: 2 }, // tablet
+          1024: { slidesPerView: 3 }, // desktop
+          1280: { slidesPerView: 5 }, // large desktop
+        }}
+      >
+        {items.map((item, index) => (
+          <SwiperSlide key={index}>
+            <div className="relative h-[250px] sm:h-[380px] overflow-hidden group shadow-md rounded-xl">
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-all duration-700 group-hover:scale-105"
+                style={{ backgroundImage: `url(${item.image})` }}
+              />
 
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-black/40" />
+              <div className="absolute inset-0 bg-black/40" />
 
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-3 sm:px-4">
-                  <p className="text-sm sm:text-lg uppercase tracking-wide opacity-90 mb-2 sm:mb-3">
-                    {item.category}
-                  </p>
+              <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-3 sm:px-4">
+                <p className="text-sm sm:text-lg uppercase tracking-wide opacity-90 mb-2 sm:mb-3">
+                  {item.category}
+                </p>
 
-                  <div className="w-16 h-[1px] bg-white/50 mb-2 sm:mb-3" />
+                <div className="w-16 h-[1px] bg-white/50 mb-2 sm:mb-3" />
 
-                  <h3 className="text-lg sm:text-2xl font-semibold tracking-wide leading-snug">
-                    {item.title}
-                  </h3>
-                </div>
+                <h3 className="text-lg sm:text-2xl font-semibold tracking-wide leading-snug">
+                  {item.title}
+                </h3>
               </div>
             </div>
-          ))}
-        </Slider>
-      </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
       {/* LINK */}
       <div className="text-center mt-12">
