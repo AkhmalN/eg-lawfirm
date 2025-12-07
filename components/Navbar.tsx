@@ -49,8 +49,8 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <Link href="/" className="flex items-center space-x-3 group">
+        <div className="flex justify-between items-center h-14 md:h-20">
+          <Link href="/" className="flex items-center space-x-1 group">
             <motion.div
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -61,17 +61,17 @@ export default function Navbar() {
                 alt="Brand Logo"
                 width={BrandLogo.width}
                 height={BrandLogo.height}
-                className="w-16 h-16 object-contain"
+                className="w-12 h-12 md:w-16 md:h-16 object-contain"
                 priority
               />
             </motion.div>
 
-            <div className="flex flex-col">
-              <span className="text-md font-bold text-slate-900 tracking-tight">
-                Elmongultom
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm md:text-md font-semibold text-slate-900 tracking-tight">
+                E.G Law Firm
               </span>
-              <span className="text-xs text-slate-600 tracking-wide">
-                Legal Consultant
+              <span className="text-[10px] md:text-xs text-slate-600 tracking-wide">
+                Advocate & Legal Consultant
               </span>
             </div>
           </Link>
