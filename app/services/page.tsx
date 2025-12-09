@@ -234,7 +234,7 @@ export default function ServicesPage() {
   return (
     <div>
       <Navbar />
-      <div className="pt-20 bg-slate-50">
+      <div className="">
         {/* Hero Section */}
         <section
           className="py-32 text-white relative bg-cover bg-center"

@@ -1,13 +1,19 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Playfair_Display, Source_Sans_3 } from "next/font/google";
 // import Navbar from "@/components/Navbar";
 // import Footer from "@/components/Footer";
 
 // const inter = Inter({ subsets: ["latin"] });
-const poppins = Poppins({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-playfair",
 });
 
 // =============================
@@ -97,7 +103,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="id">
-      <body className={poppins.className}>
+      <body className={sourceSans.className}>
         {/* <Navbar /> */}
         <main className="min-h-screen">{children}</main>
         {/* <Footer /> */}

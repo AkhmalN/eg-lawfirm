@@ -44,7 +44,7 @@ export default function AboutPage() {
   return (
     <div>
       <Navbar />
-      <div className="pt-20">
+      <div className="">
         {/* Hero Section */}
         <section
           className="py-32 text-white relative bg-cover bg-center"

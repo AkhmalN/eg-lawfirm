@@ -20,35 +20,19 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-slate-200">
-      {/* Pre-footer / Thank You Message */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-16"
-      >
-        <h3 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-          Terima Kasih
-        </h3>
-        <p className="text-lg sm:text-xl text-slate-400 leading-relaxed max-w-3xl mx-auto">
-          EG Law Firm hadir sebagai mitra hukum yang dapat Anda percaya untuk
-          memberikan solusi terbaik dan perlindungan hukum yang komprehensif.
-          Dengan integritas dan dedikasi tinggi, kami siap membantu Anda dalam
-          setiap kebutuhan hukum.
-        </p>
-      </motion.div>
+    <footer className="bg-blue-950 text-white">
+      <div className="max-w-7xl mx-auto px-8 py-16">
+        <h2 className="text-4xl font-light mb-12">Let’s Talk</h2>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12"
+          className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-12"
         >
-          {/* Brand & Social */}
-          <motion.div variants={fadeInUp}>
+          {/* Brand & Contact Info */}
+          <motion.div variants={fadeInUp} className="text-sm leading-relaxed">
             <div className="flex items-center space-x-3 mb-6">
               <Image
                 src={BrandLogo}
@@ -59,74 +43,54 @@ export default function Footer() {
                 priority
               />
               <div className="flex flex-col">
-                <span className="text-md font-bold text-white tracking-tight">
-                  Elmongultom
+                <span className="text-md font-bold tracking-tight text-2xl md:text-xl">
+                  E.G Law Firm
                 </span>
-                <span className="text-xs text-slate-400 tracking-wide">
-                  Legal Consultant
+                <span className=" text-slate-300 tracking-wide text-1xl md:text-md">
+                  Advocate & Legal Consultant
                 </span>
               </div>
             </div>
-            <p className="text-sm text-slate-300 leading-relaxed mb-4">
-              Mitra hukum terpercaya dengan pengalaman bertahun-tahun,
-              menghadirkan solusi hukum profesional bagi klien korporasi maupun
-              personal.
-            </p>
 
-            {/* Contact Info */}
-            <ul className="space-y-2 text-sm mb-4">
+            <ul className="space-y-2 mb-4">
               <li className="flex items-center space-x-2">
-                <Phone className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                <Phone className="w-5 h-5 text-slate-300 flex-shrink-0" />
                 <a
                   href="tel:+6282128759115"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors text-xl md:text-lg"
                 >
                   0821-2875-9115
                 </a>
               </li>
               <li className="flex items-center space-x-2">
-                <Mail className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                <Mail className="w-5 h-5 text-slate-300 flex-shrink-0" />
                 <a
                   href="mailto:eglawfirm19@gmail.com"
-                  className="hover:text-white transition-colors"
+                  className="hover:text-white transition-colors text-xl md:text-lg"
                 >
                   eglawfirm19@gmail.com
                 </a>
               </li>
               <li className="flex items-center space-x-2">
-                <Globe className="w-5 h-5 text-slate-400 flex-shrink-0" />
+                <Globe className="w-5 h-5 text-slate-300 flex-shrink-0" />
                 <a
                   href="https://elmongultomlawfirm.com"
-                  className="hover:text-white transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="hover:text-white transition-colors text-xl md:text-lg"
                 >
                   elmongultomlawfirm.com
                 </a>
               </li>
             </ul>
-
-            {/* Social Media */}
-            {/* <div className="flex space-x-4 mt-2">
-              {[Facebook, Twitter, Linkedin, Instagram].map((Icon, idx) => (
-                <motion.a
-                  key={idx}
-                  href="#"
-                  whileHover={{ scale: 1.2, y: -2 }}
-                  className="text-slate-400 hover:text-white transition-colors"
-                >
-                  <Icon className="w-5 h-5" />
-                </motion.a>
-              ))}
-            </div> */}
           </motion.div>
 
           {/* Quick Links */}
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-white font-semibold text-lg mb-4">
+          <motion.div variants={fadeInUp} className="space-y-3">
+            <h3 className="font-semibold text-2xl md:text-xl mb-4">
               Quick Links
             </h3>
-            <ul className="space-y-3">
+            <ul>
               {[
                 { label: "About Us", href: "/about" },
                 { label: "Our Services", href: "/services" },
@@ -135,7 +99,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-white transition-all duration-300 inline-block relative group"
+                    className="hover:text-white transition-all duration-300 relative group font-thin text-xl md:text-lg"
                   >
                     {link.label}
                     <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -146,11 +110,11 @@ export default function Footer() {
           </motion.div>
 
           {/* Practice Areas */}
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-white font-semibold text-lg mb-4">
+          <motion.div variants={fadeInUp} className="space-y-3">
+            <h3 className="font-semibold text-2xl md:text-xl mb-4">
               Practice Areas
             </h3>
-            <ul className="space-y-3">
+            <ul>
               {[
                 "Corporate Law",
                 "Civil Litigation",
@@ -162,7 +126,7 @@ export default function Footer() {
                 <li key={area}>
                   <Link
                     href="/services"
-                    className="text-sm hover:text-white transition-all duration-300 inline-block relative group"
+                    className="hover:text-white transition-all duration-300 relative group text-xl md:text-lg font-thin"
                   >
                     {area}
                     <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -173,27 +137,27 @@ export default function Footer() {
           </motion.div>
 
           {/* Office Info */}
-          <motion.div variants={fadeInUp}>
-            <h3 className="text-white font-semibold text-lg mb-4">
+          <motion.div variants={fadeInUp} className="space-y-4">
+            <h3 className="font-semibold text-2xl md:text-xl mb-4">
               Office Info
             </h3>
-            <ul className="space-y-4 text-sm">
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+            <ul>
+              <li className="flex items-start space-x-3 my-2 font-thin">
+                <MapPin className="w-5 h-5 text-slate-300 flex-shrink-0 mt-0.5" />
                 <span>
                   Kantor Pusat: Jl. H. Sa`aba No.10, RT.13/RW.2, Meruya Sel.,
                   Kec. Kembangan, Kota Jakarta Barat, DKI Jakarta 11650
                 </span>
               </li>
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+              <li className="flex items-start space-x-3 my-2 font-thin">
+                <MapPin className="w-5 h-5 text-slate-300 flex-shrink-0 mt-0.5" />
                 <span>
                   Kantor Cabang Bali: Jl. Trenggana No.135, Penatih, Kec.
                   Denpasar Timur, Kota Denpasar, Bali 80238
                 </span>
               </li>
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-slate-400 flex-shrink-0 mt-0.5" />
+              <li className="flex items-start space-x-3 my-2 font-thin">
+                <MapPin className="w-5 h-5 text-slate-300 flex-shrink-0 mt-0.5" />
                 <span>
                   Kantor Cabang Medan: Jl. Suka No 24, Kelurahan Setia Rejo,
                   Kecamatan Medan Kota, Kota Medan 20212 Sumut
@@ -203,17 +167,29 @@ export default function Footer() {
           </motion.div>
         </motion.div>
 
-        {/* Bottom Copyright */}
+        {/* Bottom bar with social & copyright */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
-          className="border-t border-slate-800 mt-12 pt-8 text-center"
+          className="flex justify-between items-center mt-12 pt-8 border-t border-white/20 text-sm text-white/70"
         >
-          <p className="text-sm text-slate-400">
-            &copy; {currentYear} Elmon Gultom Law Firm. All rights reserved.
-          </p>
+          {/* Social media icons */}
+          <div className="flex space-x-6">
+            <a href="#" aria-label="LinkedIn" className="hover:text-white">
+              <Linkedin className="w-5 h-5" />
+            </a>
+            <a href="#" aria-label="Instagram" className="hover:text-white">
+              <Instagram className="w-5 h-5" />
+            </a>
+            <a href="#" aria-label="Twitter" className="hover:text-white">
+              <Twitter className="w-5 h-5" />
+            </a>
+          </div>
+
+          {/* Copyright */}
+          <div>© {currentYear} Elmon Gultom Law Firm. All rights reserved.</div>
         </motion.div>
       </div>
     </footer>

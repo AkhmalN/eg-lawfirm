@@ -4,17 +4,17 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { ChartNoAxesGantt, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BrandLogo from "@/assets/logo-brand.png";
 import Image from "next/image";
 
 const navLinks = [
-  { href: "/", label: "Beranda" },
-  { href: "/about", label: "Tentang Kami" },
-  { href: "/services", label: "Pelayanan" },
-  { href: "/news", label: "Berita & Publikasi" },
-  { href: "/contact", label: "Kontak" },
+  { href: "/", label: "Home" },
+  { href: "/about", label: "Our Firm" },
+  { href: "/services", label: "Our Service" },
+  { href: "/news", label: "Our Blog" },
+  // { href: "/contact", label: "Lets Talk" },
 ];
 
 export default function Navbar() {
@@ -37,20 +37,30 @@ export default function Navbar() {
     setIsOpen(false); // close mobile menu on path change
   }, [pathname]);
 
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkSize = () => setIsMobile(window.innerWidth < 1024);
+    checkSize();
+    window.addEventListener("resize", checkSize);
+    return () => window.removeEventListener("resize", checkSize);
+  }, []);
+
   const isActive = (href: string) => currentPath === href;
 
   return (
     <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
+      // initial={{ y: -100 }}
+      // animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-white/95 backdrop-blur-md shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+    ${(isMobile && isOpen) || isScrolled ? "bg-blue-950" : "bg-transparent"}
+  `}
+      style={{ borderBottom: "0.1px solid #B0B0B0" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-14 md:h-20">
-          <Link href="/" className="flex items-center space-x-1 group">
+        <div className="flex justify-between items-center h-16 md:h-24 py-3 md:py-0">
+          <Link href="/" className="flex items-center space-x-1 group ">
             <motion.div
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -61,21 +71,24 @@ export default function Navbar() {
                 alt="Brand Logo"
                 width={BrandLogo.width}
                 height={BrandLogo.height}
-                className="w-12 h-12 md:w-16 md:h-16 object-contain"
+                className="w-16 h-16 md:w-16 md:h-16 object-contain"
                 priority
               />
             </motion.div>
 
-            <div className="flex flex-col leading-tight">
-              <span className="text-sm md:text-md font-semibold text-slate-900 tracking-tight">
+            <div className="hidden lg:flex flex-col leading-tight">
+              <span
+                className={`text-sm md:text-lg font-semibold ${"text-white"} tracking-tight`}
+              >
                 E.G Law Firm
               </span>
-              <span className="text-[10px] md:text-xs text-slate-600 tracking-wide">
+              <span
+                className={`text-[10px] md:text-base ${"text-white/50"} tracking-wide`}
+              >
                 Advocate & Legal Consultant
               </span>
             </div>
           </Link>
-
           {/* Desktop links */}
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => (
@@ -86,28 +99,36 @@ export default function Navbar() {
                   className="relative px-4 py-2"
                 >
                   <span
-                    className={`text-sm font-medium transition-colors text-slate-600 hover:text-slate-900`}
+                    className={`text-md font-thin transition-colors
+                      text-slate-200
+                    `}
                   >
                     {link.label}
                   </span>
-                  {/* <motion.div
-                    layoutId="navbar-indicator"
-                    className={`absolute bottom-0 left-0 right-0 h-0.5 bg-slate-900 transition-opacity ${
-                      isActive(link.href) ? "opacity-100" : "opacity-0"
-                    }`}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                  /> */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 -bottom-1 h-[2px] w-[50%] transition-all
+    ${isActive(link.href) ? "bg-white opacity-100" : "opacity-0"}
+  `}
+                  ></div>
                 </motion.div>
               </Link>
             ))}
+            <button className="relative bg-white text-blue-950 font-normal text-base py-3 px-6 rounded-full overflow-hidden">
+              Let&apos;s talk
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+            </button>
           </div>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md text-slate-900 hover:bg-slate-100"
+            className="lg:hidden p-2 rounded-md text-white"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? (
+              <X className="w-12 h-12" />
+            ) : (
+              <ChartNoAxesGantt className="w-12 h-12" />
+            )}
           </button>
         </div>
       </div>
@@ -117,12 +138,12 @@ export default function Navbar() {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: "100dvh" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="lg:hidden bg-white border-t border-slate-200 overflow-hidden"
+            className={`lg:hidden bg-blue-950  overflow-hidden mt-5`}
           >
-            <div className="px-4 py-4 space-y-1">
+            <div className="px-4 py-4 space-y-1 h-full">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
@@ -132,9 +153,9 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors ${
+                    className={`block px-4 py-3 rounded-md text-3xl font-normal transition-colors hover:text-slate-200 ${
                       isActive(link.href)
-                        ? "bg-slate-900 text-white"
+                        ? " text-white"
                         : "text-slate-600 hover:bg-slate-100"
                     }`}
                   >
@@ -142,7 +163,7 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.05 }}
@@ -153,7 +174,7 @@ export default function Navbar() {
                     Konsultasi Sekarang
                   </Button>
                 </Link>
-              </motion.div>
+              </motion.div> */}
             </div>
           </motion.div>
         )}

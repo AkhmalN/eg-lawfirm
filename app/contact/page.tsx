@@ -221,7 +221,7 @@ export default function ContactPage() {
   return (
     <div>
       <Navbar />
-      <div className="pt-20 bg-slate-50">
+      <div className="">
         <HeroContact />
         <motion.section
           variants={staggerContainer}
