@@ -5,17 +5,18 @@ import SectionHeader from "./ui/section-header";
 import { motion } from "framer-motion";
 import { fadeInLeft, fadeInUp, staggerContainer } from "@/lib/motion";
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 
-const FirmOverview = () => {
+const FirmOverviewSection = () => {
   return (
     <motion.section
       variants={staggerContainer}
       initial="initial"
       whileInView="animate"
       viewport={{ once: true, amount: 0.2 }}
-      className="w-full min-h-screen bg-blue-950 text-white flex items-start"
+      className="w-full min-h-screen bg-blue-950 text-white flex items-start py-5"
     >
-      <div className="px-6 w-full flex flex-col items-start gap-5 md:gap-20 py-20">
+      <div className="px-6 w-full flex flex-col items-start gap-5 md:gap-20">
         {/* ==========================
             HEADER ROW
         ========================== */}
@@ -39,7 +40,7 @@ const FirmOverview = () => {
             viewport={{ amount: 0.2 }}
             className="w-full flex flex-col justify-start text-left"
           >
-            <h3 className="text-4xl md:text-4xl lg:text-5xl leading-relaxed font-light">
+            <h3 className="text-2xl md:text-4xl lg:text-5xl leading-relaxed font-light">
               A professional legal firm in Jakarta and Bali delivering
               strategic, integrity-driven solutions.
             </h3>
@@ -70,24 +71,26 @@ const FirmOverview = () => {
             className="md:w-1/2 flex flex-col gap-10 justify-start"
           >
             {/* Main idea */}
-            <p className="text-3xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-normal text-gray-200 leading-relaxed">
+            <p className="text-2xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-normal text-gray-200 leading-relaxed">
               Supported by highly experienced advocates, we provide strategic
               legal guidance across a wide range of services.
             </p>
 
             {/* Value proposition */}
-            <p className="text-xl font-light text-gray-200 leading-relaxed">
+            <p className="text-lg font-light text-gray-200 leading-relaxed">
               We ensure every legal action we take offers strong protection and
               delivers the best possible outcomes for our clients.
             </p>
 
             {/* Button */}
             <div className="mt-5 md:mt-24 inline-block group">
-              <button className="relative text-white font-thin text-base py-1 md:py-3 overflow-hidden border border-white md:border-0 rounded-full px-6 md:px-0 transition-all duration-300  hover:text-white">
-                Discover Our Firm
-                {/* Garis bawah untuk desktop */}
-                <span className="hidden md:block absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-              </button>
+              <a href="/about">
+                <button className="relative text-white font-thin text-base md:text-lg py-1 md:py-3 overflow-hidden border border-white md:border-0 rounded-full md:rounded-none px-6 md:px-0 transition-all duration-300  hover:text-white">
+                  Discover Our Firm
+                  {/* Garis bawah untuk desktop */}
+                  <span className="hidden md:block absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -111,7 +114,7 @@ const FirmOverview = () => {
             viewport={{ amount: 0.2 }}
             className="w-full flex flex-col justify-start text-left"
           >
-            <h3 className="text-4xl md:text-4xl lg:text-5xl leading-relaxed font-light">
+            <h3 className="text-2xl md:text-4xl lg:text-5xl leading-relaxed font-light">
               Providing you with the latest updates on legal developments in
               Indonesia.
             </h3>
@@ -119,7 +122,7 @@ const FirmOverview = () => {
 
           {/* Button */}
           <div className="mt-10 md:mt-24 inline-block group">
-            <button className="relative text-white font-thin text-base py-1 md:py-3 overflow-hidden border border-white md:border-0 rounded-full px-6 md:px-0 transition-all duration-300  hover:text-white">
+            <button className="relative text-white font-thin text-base md:text-lg py-1 md:py-3 overflow-hidden border border-white md:border-0 rounded-full md:rounded-none px-6 md:px-0 transition-all duration-300  hover:text-white">
               Discover The Indonesia law blog
               {/* Garis bawah untuk desktop */}
               <span className="hidden md:block absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
@@ -131,4 +134,4 @@ const FirmOverview = () => {
   );
 };
 
-export default FirmOverview;
+export default FirmOverviewSection;

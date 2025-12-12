@@ -14,11 +14,11 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   return (
     <div className="flex items-center gap-3 py-6">
       <span
-        className="w-3 h-6 rounded-sm -skew-x-12"
+        className="w-1 md:w-3 h-6 rounded-sm -skew-x-12"
         style={{ backgroundColor: bgColor || "#3DB54A" }}
       ></span>
       <h2
-        className={`text-lg tracking-wider font-thin`}
+        className={`text-base sm:text-lg md:text-xl lg:text-2xl tracking-wider font-thin`}
         style={{ color: titleColor }}
       >
         {title}

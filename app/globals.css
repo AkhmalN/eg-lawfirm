@@ -81,40 +81,20 @@
   }
 }
 
-/* spray effect */
-/* === Efek Pilok / Graffiti === */
-.graffiti-bg {
-  position: absolute;
-  overflow: hidden;
-  filter: blur(18px);
-}
-
-/* Lapisan spray paint texture */
-.graffiti-bg::after {
+.fade-bottom::after {
   content: "";
   position: absolute;
-  inset: -10%;
-  background-image: radial-gradient(
-      circle,
-      rgba(255, 255, 255, 0.12) 0%,
-      transparent 55%
-    ),
-    radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
-  background-size: 140px 140px, 240px 240px;
-  mix-blend-mode: screen;
-  opacity: 0.55;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px; /* tinggi lebih besar */
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 37, 84, 0) 0%,
+    /* transparan */ rgba(23, 37, 84, 0.7) 30%,
+    /* mulai gelap */ rgba(23, 37, 84, 0.9) 60%,
+    /* hampir solid */ #172554 100% /* bg-blue-950 (warna FirmOverview) */
+  );
   pointer-events: none;
-  filter: blur(2px);
-}
-
-/* Outline “bleed” khas pilok */
-.graffiti-bg::before {
-  content: "";
-  position: absolute;
-  inset: -20px;
-  border-radius: inherit;
-  background: inherit;
-  filter: blur(40px) brightness(1.6);
-  opacity: 0.45;
-  z-index: -1;
+  z-index: 10;
 }
