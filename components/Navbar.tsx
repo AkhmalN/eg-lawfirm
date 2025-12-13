@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChartNoAxesGantt, Menu, X } from "lucide-react";
+import { ArrowRight, ChartNoAxesGantt, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BrandLogo from "@/assets/logo-brand.png";
 import Image from "next/image";
@@ -12,8 +12,8 @@ import Image from "next/image";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "Our Firm" },
-  { href: "/services", label: "Our Service" },
-  { href: "/news", label: "Our Blog" },
+  { href: "/services", label: "Our Expertise" },
+  // { href: "/news", label: "Our Blog" },
   // { href: "/contact", label: "Lets Talk" },
 ];
 
@@ -64,7 +64,7 @@ export default function Navbar() {
             <motion.div
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="w-fit"
+              className="w-fit hidden md:block"
             >
               <Image
                 src={BrandLogo}
@@ -78,12 +78,16 @@ export default function Navbar() {
 
             <div className="hidden lg:flex flex-col leading-tight">
               <span
-                className={`text-sm md:text-lg font-semibold ${"text-white"} tracking-tight`}
+                className={`text-sm md:text-lg font-semibold ${
+                  isScrolled ? "text-white/80" : "text-gray-400"
+                } tracking-tight`}
               >
                 E.G Law Firm
               </span>
               <span
-                className={`text-[10px] md:text-base ${"text-white/50"} tracking-wide`}
+                className={`text-[10px] md:text-base ${
+                  isScrolled ? "text-white/50" : "text-gray-400"
+                } tracking-wide`}
               >
                 Advocate & Legal Consultant
               </span>
@@ -100,34 +104,49 @@ export default function Navbar() {
                 >
                   <span
                     className={`text-md font-thin transition-colors
-                      text-slate-200
+                      text-slate-400
                     `}
                   >
                     {link.label}
                   </span>
                   <div
                     className={`absolute left-1/2 -translate-x-1/2 -bottom-1 h-[2px] w-[50%] transition-all
-    ${isActive(link.href) ? "bg-white opacity-100" : "opacity-0"}
-  `}
+                      ${
+                        isActive(link.href) && !isScrolled
+                          ? "bg-blue-950 opacity-100"
+                          : isActive(link.href)
+                          ? "bg-white opacity-100"
+                          : "opacity-0"
+                      }
+                    `}
                   ></div>
                 </motion.div>
               </Link>
             ))}
-            <button className="relative bg-white text-blue-950 font-normal text-base py-3 px-6 rounded-full overflow-hidden">
-              Let&apos;s talk
-              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
+            <button
+              className={`relative ${
+                isScrolled ? "bg-white text-blue-950" : "bg-blue-950 text-white"
+              }  font-normal text-base py-3 px-6 rounded-full overflow-hidden group flex`}
+            >
+              <div>Let&apos;s talk </div>
+              <ArrowRight className="ml-2 transition-transform duration-300 group-hover:rotate-180" />
+              <span
+                className={`absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full`}
+              ></span>
             </button>
           </div>
 
           {/* Mobile toggle */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md text-white"
+            className={`lg:hidden p-2 rounded-md ${
+              isScrolled || isOpen ? "text-white" : "text-blue-950"
+            }`}
           >
             {isOpen ? (
-              <X className="w-12 h-12" />
+              <X className="w-10 h-10" />
             ) : (
-              <ChartNoAxesGantt className="w-12 h-12" />
+              <ChartNoAxesGantt className="w-10 h-10" />
             )}
           </button>
         </div>
@@ -153,7 +172,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={`block px-4 py-3 rounded-md text-3xl font-normal transition-colors hover:text-slate-200 ${
+                    className={`block px-4 py-3 rounded-md text-2xl font-normal transition-colors hover:text-slate-200 ${
                       isActive(link.href)
                         ? " text-white"
                         : "text-slate-600 hover:bg-slate-100"
@@ -161,20 +180,17 @@ export default function Navbar() {
                   >
                     {link.label}
                   </Link>
+                  <div
+                    className={`translate-x-1/3 -bottom-1 h-[2px] w-[20%] transition-all
+                      ${
+                        isActive(link.href)
+                          ? "bg-white opacity-100"
+                          : "opacity-0"
+                      }
+                    `}
+                  ></div>{" "}
                 </motion.div>
               ))}
-              {/* <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.05 }}
-                className="pt-2"
-              >
-                <Link href="/contact">
-                  <Button className="w-full bg-slate-900 text-white hover:bg-slate-800">
-                    Konsultasi Sekarang
-                  </Button>
-                </Link>
-              </motion.div> */}
             </div>
           </motion.div>
         )}

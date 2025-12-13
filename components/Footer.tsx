@@ -109,7 +109,7 @@ export default function Footer() {
             <ul>
               {[
                 { label: "About Us", href: "/about" },
-                { label: "Our Services", href: "/services" },
+                { label: "Our Expertise", href: "/services" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
                 <li key={link.href}>
