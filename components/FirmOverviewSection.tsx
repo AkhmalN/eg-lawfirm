@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import SectionHeader from "./ui/section-header";
 import { motion } from "framer-motion";
 import { fadeInLeft, fadeInUp, staggerContainer } from "@/lib/motion";
@@ -83,14 +84,20 @@ const FirmOverviewSection = () => {
             </p>
 
             {/* Button */}
-            <div className="mt-5 md:mt-24 inline-block group">
-              <a href="/about">
-                <button className="relative text-white font-thin text-base md:text-lg py-1 md:py-3 overflow-hidden border border-white md:border-0 rounded-full md:rounded-none px-6 md:px-0 transition-all duration-300  hover:text-white">
-                  Discover Our Firm
-                  {/* Garis bawah untuk desktop */}
-                  <span className="hidden md:block absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-                </button>
-              </a>
+            <div className="mt-5 md:mt-24">
+              <Link
+                href="/about"
+                className="relative inline-flex items-center gap-4 group"
+                aria-label="Discover Our Firm"
+              >
+                <SectionHeader
+                  title="Discover Our Firm"
+                  titleColor="#F5C857"
+                  bgColor="#F5C857"
+                />
+                {/* bottom border that expands on hover (desktop only) */}
+                <span className="hidden md:block absolute left-0 right-0 bottom-0 h-0.5 bg-white w-0 transition-all duration-300 group-hover:w-full" />
+              </Link>
             </div>
           </motion.div>
         </div>

@@ -12,7 +12,7 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   bgColor,
 }) => {
   return (
-    <div className="flex items-center gap-3 py-6">
+    <div className="flex items-center gap-3 py-2">
       <span
         className="w-1 md:w-3 h-6 rounded-sm -skew-x-12"
         style={{ backgroundColor: bgColor || "#3DB54A" }}

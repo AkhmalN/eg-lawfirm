@@ -4,7 +4,18 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChartNoAxesGantt, Menu, X } from "lucide-react";
+import {
+  ArrowRight,
+  ChartNoAxesGantt,
+  Globe,
+  Instagram,
+  Linkedin,
+  Mail,
+  Menu,
+  Phone,
+  Twitter,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import BrandLogo from "@/assets/logo-brand.png";
 import Image from "next/image";
@@ -18,6 +29,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const currentYear = new Date().getFullYear();
   const pathname = usePathname();
   const [currentPath, setCurrentPath] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -47,6 +59,7 @@ export default function Navbar() {
   }, []);
 
   const isActive = (href: string) => currentPath === href;
+  const isHomePath = currentPath === "/";
 
   return (
     <motion.nav
@@ -64,29 +77,29 @@ export default function Navbar() {
             <motion.div
               whileHover={{ rotate: 5, scale: 1.1 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              className="w-fit hidden md:block"
+              className="w-fit"
             >
               <Image
                 src={BrandLogo}
                 alt="Brand Logo"
                 width={BrandLogo.width}
                 height={BrandLogo.height}
-                className="w-16 h-16 md:w-16 md:h-16 object-contain"
+                className="w-12 h-12 md:w-16 md:h-16 object-contain"
                 priority
               />
             </motion.div>
 
-            <div className="hidden lg:flex flex-col leading-tight">
+            <div className="flex flex-col leading-tight">
               <span
                 className={`text-sm md:text-lg font-semibold ${
-                  isScrolled ? "text-white/80" : "text-gray-400"
+                  isHomePath || isScrolled ? "text-white/80" : "text-gray-400"
                 } tracking-tight`}
               >
                 E.G Law Firm
               </span>
               <span
                 className={`text-[10px] md:text-base ${
-                  isScrolled ? "text-white/50" : "text-gray-400"
+                  isHomePath || isScrolled ? "text-white/50" : "text-gray-400"
                 } tracking-wide`}
               >
                 Advocate & Legal Consultant
@@ -140,7 +153,9 @@ export default function Navbar() {
           <button
             onClick={() => setIsOpen(!isOpen)}
             className={`lg:hidden p-2 rounded-md ${
-              isScrolled || isOpen ? "text-white" : "text-blue-950"
+              isHomePath || isScrolled || isOpen
+                ? "text-white"
+                : "text-blue-950"
             }`}
           >
             {isOpen ? (
@@ -155,44 +170,154 @@ export default function Navbar() {
       {/* Mobile menu */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "100dvh" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className={`lg:hidden bg-blue-950  overflow-hidden mt-5`}
-          >
-            <div className="px-4 py-4 space-y-1 h-full">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.45 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              onClick={() => setIsOpen(false)}
+              className="fixed inset-0 z-40 bg-black"
+            />
+
+            {/* Panel */}
+            <motion.aside
+              key="panel"
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
+              className="fixed inset-y-0 right-0 z-50 w-full sm:w-[480px] bg-blue-950 overflow-auto"
+              aria-modal="true"
+              role="dialog"
+            >
+              <div className="px-6 py-6 min-h-screen flex flex-col">
+                <div className="flex items-center justify-between mb-6">
                   <Link
-                    href={link.href}
-                    className={`block px-4 py-3 rounded-md text-2xl font-normal transition-colors hover:text-slate-200 ${
-                      isActive(link.href)
-                        ? " text-white"
-                        : "text-slate-600 hover:bg-slate-100"
-                    }`}
+                    href="/"
+                    className="flex items-center gap-3"
+                    onClick={() => setIsOpen(false)}
                   >
-                    {link.label}
+                    <Image
+                      src={BrandLogo}
+                      alt="Logo"
+                      width={44}
+                      height={44}
+                      className="object-contain"
+                    />
+                    <div className="text-white">
+                      <div className="font-semibold">E.G Law Firm</div>
+                      <div className="text-xs text-white/70">
+                        Advocate & Legal Consultant
+                      </div>
+                    </div>
                   </Link>
-                  <div
-                    className={`translate-x-1/3 -bottom-1 h-[2px] w-[20%] transition-all
-                      ${
-                        isActive(link.href)
-                          ? "bg-white opacity-100"
-                          : "opacity-0"
-                      }
-                    `}
-                  ></div>{" "}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+                  <button
+                    aria-label="Close menu"
+                    onClick={() => setIsOpen(false)}
+                    className="p-2 rounded-md text-white/90"
+                  >
+                    <X className="w-7 h-7" />
+                  </button>
+                </div>
+
+                <nav className="flex-1">
+                  <ul className="space-y-3">
+                    {navLinks.map((link, index) => (
+                      <motion.li
+                        key={link.href}
+                        initial={{ opacity: 0, x: 12 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.06 }}
+                      >
+                        <Link
+                          href={link.href}
+                          onClick={() => setIsOpen(false)}
+                          className={`block w-full py-4 text-2xl font-light text-white/90 hover:text-white transition-colors ${
+                            isActive(link.href) ? "text-white" : "text-white/80"
+                          }`}
+                        >
+                          {link.label}
+                        </Link>
+                        <div className="h-[1px] bg-white/10 w-full" />
+                      </motion.li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-6">
+                    <Link href="/contact" onClick={() => setIsOpen(false)}>
+                      <button className="w-full bg-white text-blue-950 py-3 rounded-full font-medium flex items-center justify-center gap-2">
+                        Let&apos;s talk
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </Link>
+                  </div>
+
+                  <div className="mt-6 text-sm text-white/80 space-y-3">
+                    <div className="flex items-center gap-3">
+                      <Phone className="w-5 h-5" />
+                      <a href="tel:+6282128759115" className="underline">
+                        0821-2875-9115
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Mail className="w-5 h-5" />
+                      <a
+                        href="mailto:eglawfirm19@gmail.com"
+                        className="underline"
+                      >
+                        eglawfirm19@gmail.com
+                      </a>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Globe className="w-5 h-5" />
+                      <a
+                        href="https://elmongultomlawfirm.com"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline"
+                      >
+                        elmongultomlawfirm.com
+                      </a>
+                    </div>
+                  </div>
+                </nav>
+
+                <div className="mt-8 pt-6 border-t border-white/10">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <a
+                        href="#"
+                        aria-label="LinkedIn"
+                        className="text-white/70 hover:text-white"
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </a>
+                      <a
+                        href="#"
+                        aria-label="Instagram"
+                        className="text-white/70 hover:text-white"
+                      >
+                        <Instagram className="w-5 h-5" />
+                      </a>
+                      <a
+                        href="#"
+                        aria-label="Twitter"
+                        className="text-white/70 hover:text-white"
+                      >
+                        <Twitter className="w-5 h-5" />
+                      </a>
+                    </div>
+                    <div className="text-xs text-white/60">
+                      © {currentYear} Elmon Gultom Law Firm
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.aside>
+          </>
         )}
       </AnimatePresence>
     </motion.nav>
