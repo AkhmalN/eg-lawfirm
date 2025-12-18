@@ -5,14 +5,14 @@ import { Button } from "./ui/button";
 
 export default function ExpertiseSection() {
   return (
-    <section className="w-full bg-[#f5f8fb] py-24 px-4 sm:px-8">
+    <section className="w-full bg-[#f5f8fb] py-16 md:py-24 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row md:items-start md:gap-10">
         {/* Left: Section Header */}
         <div className="md:w-1/4 flex flex-col items-start md:items-end md:pr-8 mb-6 md:mb-0">
           <SectionHeader
             title="OUR EXPERTISE"
-            titleColor="#29488a"
-            bgColor="#b24592"
+            titleColor="#"
+            bgColor="#F5C857"
           />
         </div>
         {/* Right: Main Content */}

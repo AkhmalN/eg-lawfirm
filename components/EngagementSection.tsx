@@ -21,7 +21,7 @@ export default function EngagementSection() {
           <SectionHeader
             title="ENGAGE TO EXCEED"
             titleColor="#fff"
-            bgColor="#3DB54A"
+            bgColor="#F5C857"
           />
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white mb-8 md:mb-10 leading-tight max-w-2xl">
             Join us and enhance your legal experience.
