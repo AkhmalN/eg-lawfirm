@@ -76,7 +76,7 @@ const NewsDetailPage = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-7xl mx-auto py-24 px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto py-32 px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Kiri - Detail Berita */}
         <div className="md:col-span-2">
           <h1 className="text-3xl font-bold mb-2">{news.title}</h1>
@@ -95,9 +95,12 @@ const NewsDetailPage = () => {
               />
             </div>
           )}
-          <div className="prose max-w-full text-slate-700">
-            {news.content || news.description}
-          </div>
+          <div
+            className="prose max-w-full text-slate-700"
+            dangerouslySetInnerHTML={{
+              __html: news.content ?? news.description ?? "",
+            }}
+          ></div>
         </div>
 
         {/* Kanan - Sidebar */}
@@ -106,7 +109,7 @@ const NewsDetailPage = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Kategori</h3>
             <div className="flex justify-start mb-6">
-              <div className="w-20 h-1 bg-[#CDA772] rounded-full" />
+              <div className="w-20 h-1 bg-blue-950 rounded-full" />
             </div>
             <ul className="space-y-2">
               {categories.map((cat, idx) => (
@@ -124,7 +127,7 @@ const NewsDetailPage = () => {
           <div>
             <h3 className="text-xl font-semibold mb-4">Berita Terbaru</h3>
             <div className="flex justify-start mb-6">
-              <div className="w-20 h-1 bg-[#CDA772] rounded-full" />
+              <div className="w-20 h-1 bg-blue-950 rounded-full" />
             </div>
             <ul className="space-y-4">
               {latestNews.map((item) => (

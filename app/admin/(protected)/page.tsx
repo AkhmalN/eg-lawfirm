@@ -3,16 +3,12 @@
 import { useEffect, useState } from "react";
 import {
   TrendingUp,
-  TrendingDown,
-  Calendar,
   Clock,
   RefreshCw,
-  ChevronRight,
   BarChart3,
   Newspaper,
   CheckCircle,
   PenTool,
-  Eye,
   AlertCircle,
   FileText,
   ArrowUpRight,

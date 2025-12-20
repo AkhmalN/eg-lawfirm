@@ -45,6 +45,7 @@ export async function POST(req: NextRequest) {
     const category = data.get("category");
     const isPublishedString = data.get("isPublished");
     const boolPublished: boolean = isPublishedString === "true";
+    const optionalLink = data.get("optional_link");
 
     console.log({
       title,
@@ -53,6 +54,7 @@ export async function POST(req: NextRequest) {
       image,
       category,
       boolPublished,
+      optionalLink,
     });
 
     if (!title || !description || !content || !image || !category) {
@@ -80,12 +82,13 @@ export async function POST(req: NextRequest) {
       category: category as string,
       image: imageUrl as string,
       isPublished: boolPublished,
+      optional_link: optionalLink ? (optionalLink as string) : undefined,
     };
 
     const [result] = await conn.execute(
       `INSERT INTO News
-      (title, description, content, image, category, isPublished)
-      VALUES (?, ?, ?, ?, ?, ?)`,
+      (title, description, content, image, category, isPublished, optional_link)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         newNews.title,
         newNews.description || null,
@@ -93,6 +96,7 @@ export async function POST(req: NextRequest) {
         imageUrl,
         newNews.category || null,
         newNews.isPublished ? 1 : 0,
+        newNews.optional_link || null,
       ]
     );
 

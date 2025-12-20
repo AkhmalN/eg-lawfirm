@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import {
@@ -15,22 +15,12 @@ import {
   Calendar,
   Clock,
 } from "lucide-react";
-
-interface NewsData {
-  id: string;
-  title: string;
-  description: string;
-  content: string;
-  category: string;
-  isPublished: boolean;
-  image?: string;
-  createdAt?: string;
-  updatedAt?: string;
-}
+import BlogEditor from "@/components/ui/blog-editor";
+import { TNewsDTO } from "@/types/news";
 
 export default function EditNews({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const [data, setData] = useState<NewsData | null>(null);
+  const [data, setData] = useState<TNewsDTO | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -38,8 +28,9 @@ export default function EditNews({ params }: { params: { id: string } }) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isPublished, setIsPublished] = useState<boolean>(false);
+  const [content, setContent] = useState<string>("");
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`/api/news/${params.id}`);
@@ -56,7 +47,7 @@ export default function EditNews({ params }: { params: { id: string } }) {
     } finally {
       setLoading(false);
     }
-  }
+  }, [params.id]);
 
   const validateForm = (form: HTMLFormElement) => {
     const newErrors: Record<string, string> = {};
@@ -70,12 +61,21 @@ export default function EditNews({ params }: { params: { id: string } }) {
       newErrors.description = "Description is required";
     }
 
-    if (!formData.get("content")?.toString().trim()) {
+    if (!content.trim()) {
       newErrors.content = "Content is required";
     }
 
     if (!formData.get("category")?.toString().trim()) {
       newErrors.category = "Category is required";
+    }
+
+    if (!formData.get("optional_link")?.toString().trim()) {
+      const link = formData.get("optional_link")?.toString().trim() || "";
+      const urlPattern =
+        /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)(\/[\w-./?%&=]*)?$/i;
+      if (link && !urlPattern.test(link)) {
+        newErrors.optional_link = "Please enter a valid URL";
+      }
     }
 
     setErrors(newErrors);
@@ -141,6 +141,7 @@ export default function EditNews({ params }: { params: { id: string } }) {
       }
 
       formData.set("isPublished", isPublished.toString());
+      formData.set("content", content);
 
       const res = await fetch(`/api/news/${params.id}`, {
         method: "PUT",
@@ -166,7 +167,7 @@ export default function EditNews({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     loadData();
-  }, [params.id]);
+  }, [params.id, loadData]);
 
   if (loading) {
     return (
@@ -348,6 +349,7 @@ export default function EditNews({ params }: { params: { id: string } }) {
                     <option value="Entertainment">Entertainment</option>
                     <option value="Health">Health</option>
                     <option value="Science">Science</option>
+                    <option value="Law">Education</option>
                     <option value="Other">Other</option>
                   </select>
                   {errors.category && (
@@ -501,25 +503,33 @@ export default function EditNews({ params }: { params: { id: string } }) {
               </span>
             </div>
 
-            <textarea
-              name="content"
-              defaultValue={data.content}
+            <BlogEditor
+              value={data.content || ""}
+              onChange={(value) => setContent(value)}
               placeholder="Write your news content here..."
-              className={`w-full min-h-[400px] px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors resize-y ${
-                errors.content ? "border-red-500" : "border-gray-300"
-              }`}
-              disabled={saving}
+              isDisabled={saving}
             />
-            {errors.content && (
-              <p className="mt-1 text-sm text-red-600">{errors.content}</p>
-            )}
+          </div>
 
-            <div className="mt-4 flex items-center gap-2 text-sm text-gray-500">
-              <ImageIcon className="w-4 h-4" />
-              <span>
-                You can embed images using markdown: ![alt text](image-url)
-              </span>
-            </div>
+          {/* Optional Link to redirect if not using id news */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Optional Link if you want to redirect to another URL
+            </label>
+            <input
+              defaultValue={data.optional_link || ""}
+              name="optional_link"
+              placeholder="Enter an optional URL to redirect to"
+              className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-black focus:border-transparent transition-colors ${
+                errors.optional_link ? "border-red-500" : "border-gray-300"
+              }`}
+              disabled={loading}
+            />
+            {errors.optional_link && (
+              <p className="mt-1 text-sm text-red-600">
+                {errors.optional_link}
+              </p>
+            )}
           </div>
 
           {/* Form Actions */}

@@ -37,7 +37,8 @@ export default function AdminLogin() {
         window.location.href = "/admin";
       } else {
         const data = await res.json();
-        setError(data.message || "Login gagal");
+        console.log("Login error response:", data);
+        setError(data.error || "Login gagal");
       }
     } catch (err) {
       setError("Terjadi kesalahan. Silakan coba lagi.");

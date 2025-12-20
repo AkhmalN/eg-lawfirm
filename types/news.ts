@@ -8,4 +8,5 @@ export interface TNewsDTO {
   isPublished?: boolean;
   createdAt?: string;
   updatedAt?: string;
+  optional_link?: string;
 }

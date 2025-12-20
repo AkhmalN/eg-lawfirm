@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST() {
   const res = NextResponse.json({ message: "Logged out" });
 
-  res.cookies.set("admin_token", "", {
+  res.cookies.set("auth_token", "", {
     httpOnly: true,
     expires: new Date(0),
   });

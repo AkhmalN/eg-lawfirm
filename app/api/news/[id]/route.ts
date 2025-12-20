@@ -35,6 +35,7 @@ export async function PUT(
     const category = data.get("category");
     const isPublishedString = data.get("isPublished");
     const boolPublished: boolean = isPublishedString === "true";
+    const optionalLink = data.get("optional_link");
 
     // Validasi field wajib (kecuali image)
     if (!title || !description || !content || !category) {
@@ -96,10 +97,11 @@ export async function PUT(
       category: category as string,
       image: imageUrl as string,
       isPublished: boolPublished,
+      optional_link: optionalLink as string,
     };
 
     const [result] = await conn.execute(
-      `UPDATE News SET title=?, description=?, content=?, category=?, image=?, isPublished=?, updatedAt=NOW() WHERE id=?`,
+      `UPDATE News SET title=?, description=?, content=?, category=?, image=?, isPublished=?, optional_link=?, updatedAt=NOW() WHERE id=?`,
       [
         updateNews.title,
         updateNews.description || null,
@@ -107,6 +109,7 @@ export async function PUT(
         updateNews.category || null,
         updateNews.image || null,
         updateNews.isPublished ? 1 : 0,
+        updateNews.optional_link || null,
         params.id,
       ]
     );

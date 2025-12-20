@@ -8,23 +8,27 @@ import { fadeInLeft, fadeInUp, staggerContainer } from "@/lib/motion";
 import Image from "next/image";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { TNewsDTO } from "@/types/news";
 
 const FirmOverviewSection = () => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const [news, setNews] = useState<TNewsDTO[]>([]);
 
-  // News items for the carousel (sample data)
-  const news = [
-    {
-      image: "/images/dpc-lbh.jpeg",
-      meta: "Firm News / 16 December 2025",
-      title:
-        "DPC LBH Tangsel Siap Berikan Bantuan Hukum Bagi Masyarakat Yang Tidak Mampu",
-      excerpt:
-        "Dalam penegakan hukum dan menjamin kepastian hukum kepada masyarakat, tidak terkecuali dari lapisan manapun hingga lapisan yang terbawah...",
-      href: "https://www.tugasbangsa.com/dpc-lbh-tangsel-siap-berikan-bantuan-hukum-bagi-masyarakat-yang-tidak-mampu",
-    },
-  ];
+  useEffect(() => {
+    async function fetchNews() {
+      try {
+        const res = await fetch("/api/news?limit=5");
+        const data = await res.json();
+        console.log("Fetched news data:", data.data);
+        setNews(data.data);
+      } catch (error) {
+        console.error("Error fetching news:", error);
+      }
+    }
+
+    fetchNews();
+  }, []);
 
   const carouselRef = useRef<HTMLDivElement | null>(null);
   const autoplayRef = useRef<number | null>(null);
@@ -235,30 +239,33 @@ const FirmOverviewSection = () => {
                 {news.map((item, idx) => (
                   <article
                     key={idx}
-                    className="w-[100%] md:min-w-[320px] snap-start bg-white/5 rounded-xl p-4 flex-shrink-0 shadow-sm"
+                    className="w-[100%] md:w-[720px] snap-start rounded-xl p-4 flex-shrink-0"
                   >
                     <div className="relative h-56 rounded-md overflow-hidden mb-4">
                       <Image
-                        src={item.image}
+                        src={item.image || "/images/news-placeholder.jpg"}
                         alt={item.title}
                         fill
                         className="object-cover object-[20%_40%] md:object-[50%_40%]"
                       />
                     </div>
+                    <p className="text-xs md:text-sm text-gray-300 mb-4">
+                      {item.createdAt
+                        ? new Date(item.createdAt).toLocaleDateString()
+                        : "Unknown Date"}
+                    </p>
 
-                    <div className="text-sm uppercase tracking-widest text-blue-100/80 mb-2">
-                      {item.meta}
-                    </div>
-
-                    <h4 className="text-xl font-light text-white mb-2">
+                    <h4 className="text-lg md:text-3xl font-light text-white mb-2">
                       {item.title}
                     </h4>
 
-                    <p className="text-sm text-blue-100/80">{item.excerpt}</p>
-
                     <div className="mt-4">
                       <Link
-                        href={item.href}
+                        href={
+                          item.optional_link
+                            ? item.optional_link
+                            : `/news/${item.id}`
+                        }
                         target="_blank"
                         className="inline-block"
                       >
