@@ -113,11 +113,11 @@ export default function ServicesPage() {
       <Navbar />
       {/* HERO SECTION */}
       <section className="py-16 md:pt-44 md:pb-16 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto py-5">
           <SectionHeader
             title="What We Do"
             titleColor="#29488a"
-            bgColor="#27ae60"
+            bgColor="#F5C857"
           />
           <div className="flex-1">
             <h1 className="text-4xl sm:text-5xl font-light text-[#29488a] leading-tight mb-4">
@@ -155,14 +155,14 @@ export default function ServicesPage() {
         "Litigation Services",
         "Legal assistance in court and other legal institutions to protect clients' rights and interests.",
         litigationServices,
-        "#b24592"
+        "#F5C857"
       )}
       {/* Non-Litigation Services */}
       {renderServiceList(
         "Non-Litigation Services",
         "Preventive and administrative legal services, including drafting, audit, compliance, and company policies.",
         nonLitigationServices,
-        "#27ae60"
+        "#F5C857"
       )}
       <Footer />
     </div>

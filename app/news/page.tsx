@@ -52,14 +52,14 @@ export default function NewsPage() {
       <Navbar />
       {/* HERO SECTION */}
       <section className="py-16 md:pt-44 md:pb-16 px-4 sm:px-8">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto py-5">
           <div className="flex flex-col md:flex-row md:items-center md:gap-16">
             {/* Section Header */}
             <div className="md:w-1/4 flex flex-col items-start md:items-end md:pr-8 mb-6 md:mb-0">
               <SectionHeader
                 title="News & Updates"
                 titleColor="#29488a"
-                bgColor="#b24592"
+                bgColor="#F5C857"
               />
             </div>
             {/* Main Title */}

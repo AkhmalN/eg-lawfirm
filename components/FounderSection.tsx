@@ -88,7 +88,7 @@ const FounderSection = () => {
           <SectionHeader
             title="FOUNDER & MANAGING PARTNER"
             titleColor="#ffffff"
-            bgColor="#b24592"
+            bgColor="#F5C857"
           />
           <motion.h2
             className="text-2xl sm:text-3xl md:text-4xl font-light text-white mb-6 mt-5"
@@ -127,7 +127,7 @@ const FounderSection = () => {
         <SectionHeader
           title="OUR PARTNERS & ASSOCIATES"
           titleColor="#ffffff"
-          bgColor="#b24592"
+          bgColor="#F5C857"
         />
         <div className="relative w-full mx-auto">
           {/* Controls (left/right) */}
