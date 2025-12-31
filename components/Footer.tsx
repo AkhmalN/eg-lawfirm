@@ -23,7 +23,7 @@ export default function Footer() {
   return (
     <footer className="bg-blue-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
-        <div className="relative w-full mb-8 sm:mb-12 group">
+        <Link href={"/contact"} className="relative w-full mb-8 sm:mb-12 group">
           <div className="flex items-center justify-between">
             <h2 className="text-4xl md:text-6xl font-light text-white/70 tracking-wide transition-all duration-300 group-hover:text-white group-hover:tracking-widest">
               Let’s Talk
@@ -35,14 +35,14 @@ export default function Footer() {
           <div className="mt-4">
             <hr className="border-white/40" />
           </div>
-        </div>
+        </Link>
 
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 pb-8 sm:pb-12"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 md:gap-12 pb-8 sm:pb-12 mt-0 sm:mt-10"
         >
           {/* Brand & Contact Info */}
           <motion.div

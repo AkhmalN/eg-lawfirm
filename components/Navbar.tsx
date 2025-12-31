@@ -128,15 +128,16 @@ export default function Navbar() {
                         isActive(link.href) && !isScrolled
                           ? "bg-blue-950 opacity-100"
                           : isActive(link.href)
-                          ? "bg-white opacity-100"
-                          : "opacity-0"
+                            ? "bg-white opacity-100"
+                            : "opacity-0"
                       }
                     `}
                   ></div>
                 </motion.div>
               </Link>
             ))}
-            <button
+            <Link
+              href="/contact"
               className={`relative ${
                 isScrolled ? "bg-white text-blue-950" : "bg-blue-950 text-white"
               }  font-normal text-base py-3 px-6 rounded-full overflow-hidden group flex`}
@@ -146,7 +147,7 @@ export default function Navbar() {
               <span
                 className={`absolute left-0 bottom-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full`}
               ></span>
-            </button>
+            </Link>
           </div>
 
           {/* Mobile toggle */}

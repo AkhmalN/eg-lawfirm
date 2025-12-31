@@ -10,31 +10,34 @@ import { fadeInUp, staggerContainer } from "@/lib/motion";
 import LawBackground from "@/assets/Case-Law-and-Legal-Strategy-2.png";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import SectionHeader from "@/components/ui/section-header";
+import Image from "next/image";
 
 function HeroContact() {
   return (
-    <section
-      className="py-32 text-white relative bg-cover bg-center"
-      style={{ backgroundImage: `url(${LawBackground.src})` }}
-    >
-      <div className="absolute inset-0 bg-black/50"></div>
-      <div className="relative max-w-4xl mx-auto text-center px-6">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-5xl sm:text-6xl font-bold mb-6 tracking-tight"
-        >
-          Hubungi Kami
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 1 }}
-          className="text-xl sm:text-2xl text-slate-200"
-        >
-          Jadwalkan konsultasi dengan tim hukum berpengalaman kami.
-        </motion.p>
+    <section className="py-16 md:pt-44 md:pb-16 px-4 sm:px-8">
+      <div className="max-w-7xl mx-auto py-5 flex flex-col md:flex-row gap-5 md:gap-16">
+        <SectionHeader
+          title="Let's Talk"
+          titleColor="#29488a"
+          bgColor="#F5C857"
+        />
+        <div className="max-w-5xl">
+          <h1 className="text-3xl sm:text-5xl font-light text-[#29488a] leading-tight mb-4">
+            Should you require further information about EGLawfirm or our legal
+            services, please feel free to contact us at eglawfirm19@gmail.com
+          </h1>
+        </div>
+      </div>
+      {/* Full-width image below hero */}
+      <div className="relative w-full h-[260px] md:h-[520px] mt-10">
+        <Image
+          src="/images/jakarta-city.jpg"
+          alt="Jakarta City"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
     </section>
   );
@@ -43,7 +46,11 @@ function HeroContact() {
 function ContactInfo() {
   return (
     <motion.div variants={fadeInUp} className="space-y-8">
-      <h2 className="text-3xl font-bold text-slate-900 mb-8">Hubungi kami :</h2>
+      <SectionHeader
+        title="Contact Information"
+        titleColor="#29488a"
+        bgColor="#F5C857"
+      />
 
       {/* Phone & Email tetap sama */}
       <div className="flex items-start space-x-4">
@@ -67,7 +74,9 @@ function ContactInfo() {
         <div className="flex items-start space-x-4">
           <MapPin className="w-6 h-6 text-slate-900 flex-shrink-0 mt-1" />
           <div>
-            <h3 className="font-semibold text-slate-900 mb-1">Kantor Pusat</h3>
+            <h3 className="font-semibold text-slate-900 mb-1">
+              Central Office
+            </h3>
             <p className="text-slate-600">
               Jl. H. Sa`aba No.10, RT.13/RW.2, Meruya Sel., Kec. Kembangan, Kota
               Jakarta Barat, DKI Jakarta 11650
@@ -91,7 +100,7 @@ function ContactInfo() {
           <MapPin className="w-6 h-6 text-slate-900 flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-semibold text-slate-900 mb-1">
-              Kantor Cabang Bali
+              Bali Branch Office
             </h3>
             <p className="text-slate-600">
               Jl. Trenggana No.135, Penatih, Kec. Denpasar Timur, Kota Denpasar,
@@ -116,7 +125,7 @@ function ContactInfo() {
           <MapPin className="w-6 h-6 text-slate-900 flex-shrink-0 mt-1" />
           <div>
             <h3 className="font-semibold text-slate-900 mb-1">
-              Kantor Cabang Medan
+              Medan Branch Office
             </h3>
             <p className="text-slate-600">
               Jl. Suka No 24 Kelurahan Setia Rejo Kecamatan Medan Kota, Kota
@@ -148,19 +157,66 @@ function ContactForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
+    setErrorMsg(null);
+
+    const form = e.currentTarget as HTMLFormElement;
+    // Read honeypot value directly from the form (uncontrolled hidden input)
+    const companyInput = form.querySelector(
+      'input[name="company"]'
+    ) as HTMLInputElement | null;
+    const companyValue = companyInput?.value || "";
+
+    // If honeypot is filled, silently treat as success (spam)
+    if (companyValue) {
       setIsSubmitting(false);
       setSubmitted(true);
-    }, 1500);
+      return;
+    }
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, company: companyValue }),
+      });
+
+      if (!res.ok) {
+        const json = await res.json().catch(() => ({}));
+        throw new Error(json.error || "Failed to send message");
+      }
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (err: any) {
+      console.error("Contact submit error:", err);
+      setErrorMsg(err.message || "Failed to send message");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <motion.div variants={fadeInUp}>
+      <div className="mb-8">
+        <SectionHeader
+          title="Send Us a Message"
+          titleColor="#29488a"
+          bgColor="#F5C857"
+        />
+        <div className="mt-6">
+          <p className="text-slate-600">
+            If you have any questions or inquiries, please fill out the form
+            below and we&apos;ll get back to you as soon as possible.
+          </p>
+        </div>
+      </div>
       <form onSubmit={handleSubmit} className="space-y-6">
+        <input type="text" name="company" hidden value="" />
         <Input
           placeholder="Your Name *"
           value={formData.name}
@@ -202,6 +258,11 @@ function ContactForm() {
             Thank you! We&apos;ll get back to you soon.
           </div>
         )}
+        {errorMsg && (
+          <div className="p-4 bg-red-50 text-red-800 rounded-lg">
+            {errorMsg}
+          </div>
+        )}
 
         <Button
           type="submit"
@@ -219,7 +280,7 @@ function ContactForm() {
 
 export default function ContactPage() {
   return (
-    <div>
+    <div className="bg-[#f5f8fb]">
       <Navbar />
       <div className="">
         <HeroContact />
@@ -228,7 +289,7 @@ export default function ContactPage() {
           initial="initial"
           whileInView="animate"
           viewport={{ once: true }}
-          className="py-24"
+          className="mb-5 sm:mb-16 lg:mb-24"
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-16">
